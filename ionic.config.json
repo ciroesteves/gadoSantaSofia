@@ -1,0 +1,7 @@
+{
+  "name": "gadoSantaSofia",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
