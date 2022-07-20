@@ -1,9 +1,62 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>detalhes</ion-title>
+    <ion-title>{{gado.nome}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-item style="text-align: center;">
+      <ion-img style="height: 150px; width: 150px;" [src]="gado.foto"></ion-img>
+    </ion-item>
+    <ion-item>
+      <ion-label>foto</ion-label>
+      <ion-input type="text" [(ngModel)]="gado.foto"></ion-input>
+    </ion-item>
+      <ion-item>
+        <ion-label>Número</ion-label>
+        <ion-input type="number" [(ngModel)]="gado.numero"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Sexo</ion-label>
+        <ion-select [(ngModel)]="gado.sexo" interface="popover" class="custom-options">
+          <ion-select-option value="Macho">Macho</ion-select-option>
+          <ion-select-option value="Fêmea">Fêmea</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Peso</ion-label>
+        <ion-input type="number" [(ngModel)]="gado.peso"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Raça</ion-label>
+        <ion-input [(ngModel)]="gado.raca"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nascimento</ion-label>
+        <ion-input type="date" [(ngModel)]="nasc"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lote</ion-label>
+        <ion-select [(ngModel)]="gado.lote" interface="popover" class="custom-options">
+          <ion-select-option value="Figueira">Figueira</ion-select-option>
+          <ion-select-option value="Santa Rita">Santa Rita</ion-select-option>
+          <ion-select-option value="Bambu Mirim">Bambu Mirim</ion-select-option>
+          <ion-select-option value="Pasto da Ponte">Pasto Ponte</ion-select-option>
+          <ion-select-option value="Açude">Açude</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-textarea rows="8" placeholder="Insira os dados extras..." [(ngModel)]="gado.rascunho"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pai</ion-label>
+        <ion-input [(ngModel)]="gado.pai"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mãe</ion-label>
+        <ion-input [(ngModel)]="gado.mae"></ion-input>
+      </ion-item>
 </ion-content>

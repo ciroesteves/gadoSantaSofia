@@ -1,7 +1,6 @@
 import { OperacoesService } from './../../service/operacoes.service';
 import { Gado } from 'src/app/interfaces/gado';
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +14,6 @@ export class GeralPage implements OnInit {
 
   constructor(
     private operacoesService: OperacoesService,
-    private modalCtrl: ModalController
   ) {
     this.animaisSubscription = this.operacoesService.getAnimais().subscribe(data => {
       this.animais = data;

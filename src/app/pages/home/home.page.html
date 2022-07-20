@@ -1,10 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Santa Sofia</ion-title>
+          <ion-title style="font-size: 25px; font-weight: bold;">
+            Santa Sofia
+          </ion-title>
+          <ion-buttons slot="end" style="margin-right: 20px;">
+            <ion-icon button (click)="logout()" name="log-out-outline"></ion-icon>
+          </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid style="margin-top: 20%;">
+  <ion-grid style="margin-top: 20%; text-align: center;">
     <ion-row>
       <ion-col>
         <ion-button class="botao-menu" color="success" [routerLink]="['/geral']">Geral</ion-button>
