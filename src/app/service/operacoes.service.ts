@@ -48,7 +48,7 @@ export class OperacoesService {
     )
   }
 
-  addAnimal(gado: any) {
+  addAnimal(gado: Gado) {
     new Date(gado.nascimento);
     return this.animaisCollection.add(gado);
   }

@@ -38,7 +38,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Foto</ion-label>
-        <ion-input type="file" (click)="uploadPhoto($event)" accept=".png,.jpg" style="font-size: 10px;"></ion-input>
+        <ion-input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" style="font-size: 10px;"></ion-input>
         <ion-input hidden formControlName="foto" [name]="foto"></ion-input>
       </ion-item>
       <ion-item>
@@ -47,7 +47,7 @@
           <ion-select-option value="Figueira">Figueira</ion-select-option>
           <ion-select-option value="Santa Rita">Santa Rita</ion-select-option>
           <ion-select-option value="Bambu Mirim">Bambu Mirim</ion-select-option>
-          <ion-select-option value="Pasto da Ponte">Pasto Ponte</ion-select-option>
+          <ion-select-option value="Pasto Ponte">Pasto Ponte</ion-select-option>
           <ion-select-option value="Açude">Açude</ion-select-option>
         </ion-select>
       </ion-item>

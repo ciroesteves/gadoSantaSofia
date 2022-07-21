@@ -42,6 +42,7 @@ export class CadastroPage implements OnInit {
       nascimento: ['', [Validators.required]],
       lote: ['', [Validators.required]],
       raca: [''],
+      foto: [''],
       rascunho: [''],
       peso: [''],
       sexo: ['', [Validators.required]],
