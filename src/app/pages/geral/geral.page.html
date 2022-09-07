@@ -10,6 +10,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-searchbar [(NgModel)]="barraPesquisa" (ionInput)="filtroAnimal($event)" clearInput>
+
+  </ion-searchbar>
   <ion-list>
     <ion-item-sliding *ngFor="let animal of animais">
       <ion-item style="font-size: large;" button [routerLink]="['/detalhes', animal.id]">
@@ -21,7 +24,7 @@
         </ion-avatar>
         <ion-label>
           {{animal.nome}}
-          <p>{{animal.lote}} - {{animal.nascimento.seconds*1000  | date:'dd/MM/yyyy'}}</p>
+          <p>{{animal.lote}} - {{(((dataAtual-(animal.nascimento.seconds*1000))/1000)/(60*60*24*30)) | number:'0.0-0'}} Meses</p>
         </ion-label>
       </ion-item>
       <ion-item-options side="end">

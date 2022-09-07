@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-    <ion-item style="text-align: center; ">
-      <ion-img style="width: 60%; margin-left: 20%; margin-right: 20%;" [src]="gado.foto"></ion-img>
+    <ion-item style="text-align: center;" *ngIf="gado.foto != ''">
+      <ion-img style="width: 90%; margin-left: 5%; margin-right: 5%;" [src]="gado.foto"></ion-img>
     </ion-item>
       <ion-item>
         <ion-label>Número</ion-label>
