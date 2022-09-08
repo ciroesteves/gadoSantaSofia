@@ -11,14 +11,14 @@ import _ from 'lodash';
 })
 export class GeralPage implements OnInit {
   public animais = new Array<Gado>();
-  gados: any;
+  public gados = new Array<Gado>();
+
   private animaisSubscription: Subscription;
   public dataAtual;
   public count = 0;
   barraPesquisa: string;
-
   constructor(
-    private operacoesService: OperacoesService,
+    private operacoesService: OperacoesService
   ) {
     this.barraPesquisa = '';
     this.dataAtual = new Date();
@@ -32,21 +32,20 @@ export class GeralPage implements OnInit {
         }
         return 0;
       }
-      
       data.sort( compare );
       this.animais = data;
+      this.gados = data;
     })
   }
 
   filtroAnimal(pesquisa: any){
     let val = pesquisa.target.value;
     if(val && val.trim() != ''){
-      this.animais = _.values(this.animais);
       this.animais.filter((animal) => {
-        return (animal.nome.indexOf(val) > -1);
+        return (animal.nome.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     } else {
-      this.gados = this.animais;
+      this.animais = this.gados;
     }
   }
 

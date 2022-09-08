@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { GeralPageRoutingModule } from './geral-routing.module';
 
 import { GeralPage } from './geral.page';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GeralPageRoutingModule
+    GeralPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [GeralPage]
 })

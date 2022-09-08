@@ -10,11 +10,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar [(NgModel)]="barraPesquisa" (ionInput)="filtroAnimal($event)" clearInput>
+  <ion-searchbar [(ngModel)]="barraPesquisa">
 
   </ion-searchbar>
   <ion-list>
-    <ion-item-sliding *ngFor="let animal of animais">
+    <ion-item-sliding *ngFor="let animal of animais | filter:barraPesquisa">
       <ion-item style="font-size: large;" button [routerLink]="['/detalhes', animal.id]">
         <ion-avatar slot="start" *ngIf="animal.sexo === 'Fêmea'" style="background-color: lightsalmon; text-align: center; width: 50px; height: 50px;">
           <h2 style="margin-top: 10px; padding-top: 0px;">{{animal.numero}}</h2>
