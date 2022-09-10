@@ -2,7 +2,6 @@ import { OperacoesService } from './../../service/operacoes.service';
 import { Gado } from 'src/app/interfaces/gado';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import _ from 'lodash';
 
 @Component({
   selector: 'app-geral',
@@ -15,12 +14,9 @@ export class GeralPage implements OnInit {
 
   private animaisSubscription: Subscription;
   public dataAtual;
-  public count = 0;
-  barraPesquisa: string;
   constructor(
     private operacoesService: OperacoesService
   ) {
-    this.barraPesquisa = '';
     this.dataAtual = new Date();
     this.animaisSubscription = this.operacoesService.getAnimais().subscribe(data => {
       function compare( a, b ) {
@@ -34,19 +30,7 @@ export class GeralPage implements OnInit {
       }
       data.sort( compare );
       this.animais = data;
-      this.gados = data;
     })
-  }
-
-  filtroAnimal(pesquisa: any){
-    let val = pesquisa.target.value;
-    if(val && val.trim() != ''){
-      this.animais.filter((animal) => {
-        return (animal.nome.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    } else {
-      this.animais = this.gados;
-    }
   }
 
   ngOnInit() {

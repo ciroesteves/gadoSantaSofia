@@ -1,9 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>lotes</ion-title>
+    <ion-title>Grupamento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card class="card-maior">
+    <ion-card-title>Totais</ion-card-title>
+    <div><h2>Quantidade Total</h2><p>{{countTotal}} animais</p></div>
+    <div><h2>Peso Total</h2><p>{{totalPeso}} kg</p></div>
+  </ion-card>
+  <ion-card class="card-menor">
+    <ion-card-title>Sexo</ion-card-title>
+    <div>Macho {{countMacho}} animais</div>
+    <div>Fêmea {{countFemea}} animais</div>
+  </ion-card>
+  <ion-card>
+    <ion-card-title>Idade</ion-card-title>
+    <div>Média {{mediaIdade}} meses/animal</div>
+    <div>0 - 8 meses {{countAte8}} animais</div>
+    <div>8 - 16 meses {{countAte16}} animais</div>
+    <div>16 - 24 meses {{countAte24}} animais</div>
+    <div>24 - 36 meses {{countAte36}} animais</div>
+    <div>> 36 meses {{countMaior36}} animais</div>
+  </ion-card>
+  <ion-card>
+    <ion-card-title>Peso</ion-card-title>
+    <div>Média {{mediaPeso}} kg/animal</div>
+    <div>0 - 150 kg {{countAte150}} animais</div>
+    <div>150 - 300 kg {{countAte300}} animais</div>
+    <div>300 - 450 kg {{countAte450}} animais</div>
+    <div>450- 600 kg {{countAte600}} animais</div>
+    <div>> 600 kg {{countMaior600}} animais</div>
+  </ion-card>
 </ion-content>

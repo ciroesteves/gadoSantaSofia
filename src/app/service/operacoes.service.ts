@@ -48,6 +48,10 @@ export class OperacoesService {
     )
   }
 
+  getLotesAnimais(parametro: string, faixa: number) {
+    return this.animaisCollection.doc<Gado>(parametro).valueChanges();
+  }
+
   addAnimal(gado: Gado) {
     new Date(gado.nascimento);
     return this.animaisCollection.add(gado);
