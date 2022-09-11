@@ -113,6 +113,7 @@ export class EdicaoPage implements OnInit {
   async editAnimal() {
     const animais = this.edicaoForm.value;
     animais.nascimento = new Date(animais.nascimento);
+    animais.nascimento.setDate(animais.nascimento.getDate() + 1)
     await this.presentLoading();
     await this.operacoesService.updateAnimal(this.gadoId, animais);
     await this.loading.dismiss();

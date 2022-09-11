@@ -5,32 +5,144 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="card-maior">
+  <ion-card class="card-maior" button [routerLink]="['/geral']">
     <ion-card-title>Totais</ion-card-title>
-    <div><h2>Quantidade Total</h2><p>{{countTotal}} animais</p></div>
-    <div><h2>Peso Total</h2><p>{{totalPeso}} kg</p></div>
+    <ion-row>
+      <ion-col>
+        <p style="text-align: center;" class="campo">Quantidade Total</p>
+      </ion-col>
+      <ion-col>
+        <p style="text-align: center;" class="campo">Peso Total</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="text-align: center;">
+        {{countTotal}} animais
+      </ion-col>
+      <ion-col style="text-align: center;">
+        {{totalPeso}} kg
+      </ion-col>
+    </ion-row>
   </ion-card>
   <ion-card class="card-menor">
-    <ion-card-title>Sexo</ion-card-title>
-    <div>Macho {{countMacho}} animais</div>
-    <div>Fêmea {{countFemea}} animais</div>
+    <ion-card-title center >Sexo</ion-card-title>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        Macho
+      </ion-col>
+      <ion-col size="5">
+        {{countMacho}} animais
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        Fêmea
+      </ion-col>
+      <ion-col size="5">
+        {{countFemea}} animais
+      </ion-col>
+    </ion-row>
   </ion-card>
   <ion-card>
     <ion-card-title>Idade</ion-card-title>
-    <div>Média {{mediaIdade}} meses/animal</div>
-    <div>0 - 8 meses {{countAte8}} animais</div>
-    <div>8 - 16 meses {{countAte16}} animais</div>
-    <div>16 - 24 meses {{countAte24}} animais</div>
-    <div>24 - 36 meses {{countAte36}} animais</div>
-    <div>> 36 meses {{countMaior36}} animais</div>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        Média
+      </ion-col>
+      <ion-col size="5">
+        {{mediaIdade}} meses/animal
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        0 - 8 meses
+      </ion-col>
+      <ion-col size="5">
+        {{countAte8}} animais
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        8 - 16 meses
+      </ion-col>
+      <ion-col size="5">
+        {{countAte16}} animais
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        16 - 24 meses
+      </ion-col>
+      <ion-col size="5">
+        {{countAte24}} animais
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        24 - 36 meses
+      </ion-col>
+      <ion-col size="5">
+        {{countAte36}} animais
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        > 36 meses 
+      </ion-col>
+      <ion-col size="5">
+        {{countMaior36}} animais
+      </ion-col>
+    </ion-row>
   </ion-card>
   <ion-card>
     <ion-card-title>Peso</ion-card-title>
-    <div>Média {{mediaPeso}} kg/animal</div>
-    <div>0 - 150 kg {{countAte150}} animais</div>
-    <div>150 - 300 kg {{countAte300}} animais</div>
-    <div>300 - 450 kg {{countAte450}} animais</div>
-    <div>450- 600 kg {{countAte600}} animais</div>
-    <div>> 600 kg {{countMaior600}} animais</div>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        Média
+      </ion-col>
+      <ion-col size="5">
+        {{mediaPeso}} kg/animal
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" class="campo">
+        0 - 150 kg
+      </ion-col>
+      <ion-col size="5">
+        {{countAte150}} animais
+      </ion-col>
+    </ion-row> 
+    <ion-row>
+      <ion-col size="4" class="campo">
+        150 - 300 kg
+      </ion-col>
+      <ion-col size="5">
+        {{countAte300}} animais
+      </ion-col>
+    </ion-row> 
+    <ion-row>
+      <ion-col size="4" class="campo">
+        300 - 450 kg
+      </ion-col>
+      <ion-col size="5">
+        {{countAte450}} animais
+      </ion-col>
+    </ion-row> 
+    <ion-row>
+      <ion-col size="4" class="campo">
+        450- 600 kg 
+      </ion-col>
+      <ion-col size="5">
+        {{countAte600}} animais
+      </ion-col>
+    </ion-row> 
+    <ion-row>
+      <ion-col size="4" class="campo">
+        > 600 kg 
+      </ion-col>
+      <ion-col size="5">
+        {{countMaior600}} animais
+      </ion-col>
+    </ion-row> 
   </ion-card>
 </ion-content>

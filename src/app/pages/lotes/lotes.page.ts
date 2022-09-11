@@ -69,12 +69,12 @@ export class LotesPage implements OnInit {
             this.countSemPeso++;
           }
           this.countTotal++;
-          this.totalPeso += element.peso;
+          this.totalPeso += Math.round(element.peso);
           this.mediaIdade += (Date.now()/1000) - element.nascimento['seconds'];
         });
         this.totalPeso = this.totalPeso*1;
         this.mediaPeso = this.totalPeso / (this.countTotal-this.countSemPeso);
-        this.mediaIdade = (this.mediaIdade/(60*60*24*30) / this.countTotal);
+        this.mediaIdade = ((this.mediaIdade/(60*60*24*30)) / this.countTotal);
         this.mediaPeso = Math.round(this.mediaPeso);
         this.mediaIdade = Math.round(this.mediaIdade);
       })      
