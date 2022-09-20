@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 })
 export class GeralPage implements OnInit {
   public animais = new Array<Gado>();
-  public gados = new Array<Gado>();
 
   private animaisSubscription: Subscription;
   public dataAtual;

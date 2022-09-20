@@ -145,4 +145,20 @@
       </ion-col>
     </ion-row> 
   </ion-card>
+  <ion-card>
+    <canvas baseChart 
+    [datasets]= "dataGraficoPeso"
+    [labels]="labelGraficoPeso"
+    [legend]=true
+    [chartType]="'bar'">
+    </canvas>
+  </ion-card>
+  <ion-card style="height: 450px;">
+    <canvas baseChart 
+    [datasets]= "dataGraficoIdade"
+    [labels]="labelGraficoIdade"
+    [legend]=true
+    [type]="'pie'">
+    </canvas>
+  </ion-card>
 </ion-content>

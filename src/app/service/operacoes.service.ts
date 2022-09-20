@@ -61,6 +61,19 @@ export class OperacoesService {
     return this.animaisCollection.doc<Gado>(id).valueChanges();
   }
 
+  getAnimaisSexo(genero: string) {
+    return this.db.collection<Gado>('gado', ref => ref.where('sexo', '==', genero)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+
+          return { id, ...data };
+        });
+      })
+    )
+  }
+
   updateAnimal(id: string, gado: Gado) {
     return this.animaisCollection.doc<Gado>(id).update(gado);
   }
