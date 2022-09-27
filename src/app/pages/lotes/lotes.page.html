@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Grupamento</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -94,6 +97,15 @@
       </ion-col>
     </ion-row>
   </ion-card>
+  <ion-card style="height: 450px;">
+    <ion-card-title>Gráfico de Idade</ion-card-title>
+    <canvas baseChart 
+    [datasets]= "dataGraficoIdade"
+    [labels]="labelGraficoIdade"
+    [legend]=false
+    [type]="'pie'">
+    </canvas>
+  </ion-card>
   <ion-card>
     <ion-card-title>Peso</ion-card-title>
     <ion-row>
@@ -146,19 +158,12 @@
     </ion-row> 
   </ion-card>
   <ion-card>
+    <ion-card-title>Gráfico de Peso</ion-card-title>
     <canvas baseChart 
     [datasets]= "dataGraficoPeso"
     [labels]="labelGraficoPeso"
-    [legend]=true
+    [legend]=false
     [chartType]="'bar'">
-    </canvas>
-  </ion-card>
-  <ion-card style="height: 450px;">
-    <canvas baseChart 
-    [datasets]= "dataGraficoIdade"
-    [labels]="labelGraficoIdade"
-    [legend]=true
-    [type]="'pie'">
     </canvas>
   </ion-card>
 </ion-content>

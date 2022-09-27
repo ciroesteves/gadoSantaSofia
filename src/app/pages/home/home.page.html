@@ -1,29 +1,27 @@
-<ion-header>
-  <ion-toolbar>
-          <ion-title style="font-size: 25px; font-weight: bold;">
-            Santa Sofia
-          </ion-title>
-          <ion-buttons slot="end" style="margin-right: 20px;">
-            <ion-icon button (click)="logout()" name="log-out-outline"></ion-icon>
-          </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <ion-grid style="margin-top: 20%; text-align: center;">
-    <ion-row>
-      <ion-col>
-        <ion-button class="botao-menu" color="success" [routerLink]="['/geral']">Geral</ion-button>
+<ion-content style="height: 100%;">
+  <ion-grid style="text-align: center; background-color: #558335; height: 100%;">
+    <ion-row style="background-repeat: no-repeat; background-size: auto 200px; background-image: url('../../../assets/fazenda_desenho.jpg'); height: 200px;">
+      <ion-col size="6">
+        <p style="font-weight: bold; font-size: 30px; margin-top: 10px; color: #565656;">Fazenda Santa Sofia</p>
       </ion-col>
-      <ion-col>
-        <ion-button class="botao-menu" color="success" [routerLink]="['/lotes']">Lotes</ion-button>
+      <ion-col size="6">
+          <ion-button shape="round" style="float: right; margin-top: 30px;" (click)="logout()">Sair</ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row style="margin-top: 50px;">
       <ion-col>
-        <ion-button class="botao-menu"><ion-icon name="hammer-outline"></ion-icon></ion-button>
+        <ion-button class="botao-menu" [routerLink]="['/geral']"><img style="width: 100%" src="../../../assets/icon/boi.png"/></ion-button>
       </ion-col>
       <ion-col>
-        <ion-button class="botao-menu"><ion-icon name="hammer-outline"></ion-icon></ion-button>
+        <ion-button class="botao-menu" [routerLink]="['/lotes']"><img style="width: 100%" src="../../../assets/icon/grafico.png"/></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 30px;">
+      <ion-col>
+        <ion-button class="botao-menu"><img style="width: 100%" src="../../../assets/icon/alimento.png"/></ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button class="botao-menu"><img style="width: 100%" src="../../../assets/icon/cifrao.png"/></ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
