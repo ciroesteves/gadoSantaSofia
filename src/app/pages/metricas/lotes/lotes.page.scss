@@ -1,9 +1,11 @@
 ion-card {
-    height: 200px;
+    height: 500px;
+    background-color: #335020;
+    color: white;
 }
 
 .card-menor {
-    height: 90px;
+    height: 100px;
 }
 
 .card-maior {
@@ -20,8 +22,9 @@ ion-col {
 
 ion-card-title {
     text-align: center;
-    background-color: lightgrey;
+    background-color: #335020;
     margin-bottom: 10px;
+    color: white;
 }
 
 .totais {

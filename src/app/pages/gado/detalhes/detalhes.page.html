@@ -8,10 +8,11 @@
 </ion-header>
 
 <ion-content>
-    <ion-item style="text-align: center;" *ngIf="gado.foto != ''">
-      <ion-img style="width: 90%; margin-left: 5%; margin-right: 5%;" [src]="gado.foto"></ion-img>
-    </ion-item>
-      <ion-item>
+  <ion-grid style="background-color: #558335;">
+    <ion-card style="margin: 15px 20px; background-color: #558335;" *ngIf="gado.foto != ''">
+      <ion-img style="height: 250px;" [src]="gado.foto"></ion-img>
+    </ion-card>
+      <ion-item class="item-background-color">
         <ion-label>Número</ion-label>
         <ion-input type="number" [(ngModel)]="gado.numero" readonly></ion-input>
       </ion-item>
@@ -35,8 +36,8 @@
         <ion-label>Lote</ion-label>
         <ion-input [(ngModel)]="gado.lote" readonly></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-textarea rows="8" placeholder="Insira os dados extras..." [(ngModel)]="gado.rascunho" readonly></ion-textarea>
+      <ion-item *ngIf="gado.rascunho != ''" >
+        <ion-textarea rows="8" [(ngModel)]="gado.rascunho" readonly></ion-textarea>
       </ion-item>
       <ion-item>
         <ion-label>Pai</ion-label>
@@ -46,4 +47,6 @@
         <ion-label>Mãe</ion-label>
         <ion-input [(ngModel)]="gado.mae" readonly></ion-input>
       </ion-item>
+  </ion-grid>
+    
 </ion-content>

@@ -1,4 +1,4 @@
-import { OperacoesService } from './../../service/operacoes.service';
+import { OperacoesService } from 'src/app/service/operacoes.service';
 import { Gado } from 'src/app/interfaces/gado';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';

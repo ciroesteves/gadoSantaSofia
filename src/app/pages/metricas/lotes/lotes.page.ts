@@ -32,7 +32,7 @@ export class LotesPage implements OnInit {
   labelGraficoPeso: any[];
   dataGraficoIdade: any[];
   labelGraficoIdade: any[];
-  optionGraficoPeso: any;
+  colorGraficoPeso: any[];
 
   constructor(private operacoesService: OperacoesService
     ) {
@@ -92,8 +92,16 @@ export class LotesPage implements OnInit {
         this.dataGraficoPeso = [{
           data: [this.countAte150, this.countAte300, this.countAte450, this.countAte600, this.countMaior600] , 
           label: 'Quantidade/ Faixa de Peso',
-          backgroundColor: '#0000FF'	
+          backgroundColor: [
+            '#0000FF',
+            '#ff0000',
+            '#FFFF00',
+            '#00FF00',
+            '#FF7F00'
+          ],
+          color: 'white'
         }];
+        
         this.labelGraficoPeso = ['-150kg', '-300kg', '-450kg', '-600kg', '+600kg']
         // Fim Gráfico Peso
         // Gráfico Idade
@@ -106,7 +114,7 @@ export class LotesPage implements OnInit {
             '#FFFF00',
             '#00FF00',
             '#FF7F00'
-        ]
+          ]
         }];
         this.labelGraficoIdade = ['-8 meses', '-16 meses', '-24 meses', '-36 meses', '+36 meses'];
         // Fim Gráfico Idade
