@@ -1,10 +1,10 @@
+import { Vacinacao } from './../interfaces/vacinacao';
 import { Gado } from 'src/app/interfaces/gado';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { map } from 'rxjs/operators';
 import { Pesagem } from '../interfaces/pesagem';
-import { Vacinacao } from '../interfaces/vacinacao';
 import { AlertController } from '@ionic/angular';
 
 
@@ -64,19 +64,6 @@ export class OperacoesService {
     return this.animaisCollection.doc<Gado>(id).valueChanges();
   }
 
-  getAnimaisSexo(genero: string) {
-    return this.db.collection<Gado>('gado', ref => ref.where('sexo', '==', genero)).snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-
-          return { id, ...data };
-        });
-      })
-    )
-  }
-
   updateAnimal(id: string, gado: Gado) {
     return this.animaisCollection.doc<Gado>(id).update(gado);
   }
@@ -93,12 +80,21 @@ export class OperacoesService {
     const animal = await this.getanimalNumero(numero);
     if (!animal.empty) {
       animal.forEach(doc => {
-        return this.animaisCollection.doc(doc.id).collection('pesagem').add(pesagem);
+        return this.animaisCollection.doc(doc.id).collection('pesagem').doc(pesagem.data.toString()).set({data: pesagem.data, peso: pesagem.peso});
       });
+      const alert = await this.alertController.create({
+        header: 'Sucesso',
+        subHeader: 'Animal: ' + numero,
+        message: 'Cadastro realizado',
+        buttons: ['OK'],
+      });
+  
+      await alert.present();
+      return;
     } else{
       const alert = await this.alertController.create({
         header: 'Erro',
-        subHeader: 'O cadastro falhou',
+        subHeader: 'Animal: ' + numero,
         message: 'Animal não encontrado',
         buttons: ['OK'],
       });
@@ -117,7 +113,31 @@ export class OperacoesService {
     }
   }
 
-  addVacinacao(id: string){
-
+  async addVacinacao(numero: number, vacinacao: any){
+    const animal = await this.getanimalNumero(numero);
+    if (!animal.empty) {
+      animal.forEach(doc => {
+        return this.animaisCollection.doc(doc.id).collection('vacinacao').doc(vacinacao.vacina).set({data: vacinacao.data}); 
+      });
+      const alert = await this.alertController.create({
+        header: 'Sucesso',
+        subHeader: 'Animal: ' + numero,
+        message: 'Cadastro realizado',
+        buttons: ['OK'],
+      });
+  
+      await alert.present();
+      return;
+    } else{
+      const alert = await this.alertController.create({
+        header: 'Erro',
+        subHeader: 'Animal: ' + numero,
+        message: 'Animal não encontrado',
+        buttons: ['OK'],
+      });
+  
+      await alert.present();
+      return;
+    }
   }
 }

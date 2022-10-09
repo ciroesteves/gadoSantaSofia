@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>vacinacao</ion-title>
+    <ion-title style="background-color: #335020; font-size: 20px; color: white;">Módulo de Vacinação</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
-</ion-content>
+<body style="background-color: #558335; ">
+  <ion-grid >
+    <ion-card style="margin-top: 150px; background-color: lightgray;">
+      <form [formGroup]="vacinacaoForm" (submit)="addvacinacaoAnimal()">
+        <ion-item>
+          <ion-label>Identificador</ion-label>
+          <ion-input type="number" placeholder="Número do animal" formControlName="numero"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Data</ion-label>
+          <ion-input type="date" formControlName="data"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Controle Sanitário</ion-label>
+          <ion-select formControlName="vacina" interface="popover" class="custom-options">
+            <ion-select-option value="Endoparasitas">Endoparasitas</ion-select-option>
+            <ion-select-option value="Ectoparasitas">Ectoparasitas</ion-select-option>
+            <ion-select-option value="Aftosa">Aftosa</ion-select-option>
+            <ion-select-option value="Clostridioses">Clostridioses</ion-select-option>
+            <ion-select-option value="Brucelose">Brucelose</ion-select-option>
+            <ion-select-option value="Pneumoenterite">Pneumoenterite</ion-select-option>
+            <ion-select-option value="Pasteurelose">Pasteurelose</ion-select-option>
+            <ion-select-option value="Raiva">Raiva</ion-select-option>
+            <ion-select-option value="IBR/BVD">IBR/BVD</ion-select-option>
+            <ion-select-option value="Leptospirose">Leptospirose</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button type="submit" [disabled]="vacinacaoForm.invalid" expand="block">Salvar</ion-button> 
+      </form>
+      <ion-button color="danger" (click)="limparForm()" expand="block">Limpar</ion-button> 
+    </ion-card>
+  </ion-grid>
+</body>

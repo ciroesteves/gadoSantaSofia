@@ -9,5 +9,6 @@ export interface Gado {
     rascunho: string,
     pai: number,
     mae: number,
-    foto: any
+    foto: any,
+    status: string
 }

@@ -1,10 +1,8 @@
-import { Pesagem } from './../../../interfaces/pesagem';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, NavController } from '@ionic/angular';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 import { OperacoesService } from 'src/app/service/operacoes.service';
-import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-pesagem',
@@ -15,7 +13,6 @@ export class PesagemPage implements OnInit {
   private loading: any;
   pesagemForm: FormGroup;
   pesagem: any;
-  numeroForm: FormGroup;
 
   constructor(
     private builder: FormBuilder,
@@ -40,6 +37,10 @@ export class PesagemPage implements OnInit {
     this.pesagem.data = new Date(this.pesagem.data);
     this.service.addPesagem(this.pesagem.numero, this.pesagem);
     this.service.addCampoPeso(this.pesagem.numero, this.pesagem.peso);
+    this.pesagemForm.reset();
+  }
+
+  limparForm(){
     this.pesagemForm.reset();
   }
 

@@ -22,7 +22,8 @@ export class CadastroPage implements OnInit {
     rascunho: '',
     pai: 0,
     mae: 0,
-    foto: ''
+    foto: '',
+    status: ''
   };
   private loading: any;
   cadastroForm: FormGroup;
