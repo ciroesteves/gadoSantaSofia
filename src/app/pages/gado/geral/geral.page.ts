@@ -2,6 +2,7 @@ import { OperacoesService } from 'src/app/service/operacoes.service';
 import { Gado } from 'src/app/interfaces/gado';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 
 @Component({
   selector: 'app-geral',
@@ -14,8 +15,10 @@ export class GeralPage implements OnInit {
   private animaisSubscription: Subscription;
   public dataAtual;
   constructor(
-    private operacoesService: OperacoesService
-  ) {
+    private operacoesService: OperacoesService,
+    private loginService: AutenticacaoService,
+  ) { 
+    this.loginService.verificaLogged();
     this.dataAtual = new Date();
     this.animaisSubscription = this.operacoesService.getAnimais().subscribe(data => {
       function compare( a, b ) {

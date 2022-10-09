@@ -12,6 +12,8 @@ const routes: Routes = [
   {path: 'login', loadChildren: () => import('./pages/auth/login/login.module').then( m => m.LoginPageModule)},
   {path: 'menuGado', loadChildren: () => import('./pages/gado/menu/menu.module').then( m => m.MenuPageModule)},
   {path: 'menuMetrica', loadChildren: () => import('./pages/metricas/menu/menu.module').then( m => m.MenuPageModule)},
+  {path: 'pesagem', loadChildren: () => import('./pages/gado/pesagem/pesagem.module').then( m => m.PesagemPageModule)},
+  {path: 'vacinacao', loadChildren: () => import('./pages/gado/vacinacao/vacinacao.module').then( m => m.VacinacaoPageModule)},
 ];
 
 @NgModule({

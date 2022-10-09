@@ -11,13 +11,17 @@ export class AutenticacaoService {
   constructor(
     private nav: NavController,
     private auth: AngularFireAuth,
-    private toast: ToastController
+    private toast: ToastController,
   ) {
     this.isLoggedIn = this.auth.authState;
    }
 
-  getUid(){
-    
+  verificaLogged(){
+    this.auth.authState.subscribe(data => {
+      if (!(data && data.email && data.uid)){
+        this.logout();
+      }
+    });
   }
   
   login(user){

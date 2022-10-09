@@ -1,8 +1,13 @@
-import { Gado } from './../interfaces/gado';
+import { Gado } from 'src/app/interfaces/gado';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { map } from 'rxjs/operators';
+import { Pesagem } from '../interfaces/pesagem';
+import { Vacinacao } from '../interfaces/vacinacao';
+import { AlertController } from '@ionic/angular';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +15,12 @@ import { map } from 'rxjs/operators';
 export class OperacoesService {
   private animaisCollection: AngularFirestoreCollection<Gado>;
   location = 'uploads/';
+  gado: Gado;
 
   constructor(
     private db: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private alertController: AlertController
   ) {
       this.animaisCollection = this.db.collection<Gado>('gado');
      }
@@ -48,11 +55,7 @@ export class OperacoesService {
     )
   }
 
-  getLotesAnimais(parametro: string, faixa: number) {
-    return this.animaisCollection.doc<Gado>(parametro).valueChanges();
-  }
-
-  addAnimal(gado: Gado) {
+  async addAnimal(gado: Gado) {
     new Date(gado.nascimento);
     return this.animaisCollection.add(gado);
   }
@@ -80,5 +83,41 @@ export class OperacoesService {
 
   deleteAnimalId(id: string) {
     return this.animaisCollection.doc(id).delete();
+  }
+
+  async getanimalNumero(numero: number){
+    return this.db.collection('gado').ref.where('numero', '==', numero).get();
+  }
+
+  async addPesagem(numero: number, pesagem: Pesagem){
+    const animal = await this.getanimalNumero(numero);
+    if (!animal.empty) {
+      animal.forEach(doc => {
+        return this.animaisCollection.doc(doc.id).collection('pesagem').add(pesagem);
+      });
+    } else{
+      const alert = await this.alertController.create({
+        header: 'Erro',
+        subHeader: 'O cadastro falhou',
+        message: 'Animal não encontrado',
+        buttons: ['OK'],
+      });
+  
+      await alert.present();
+      return;
+    }
+  }
+
+  async addCampoPeso(numero: number, peso: number){
+    const animal = await this.getanimalNumero(numero);
+    if (!animal.empty) {
+      animal.forEach(doc => {
+        return this.animaisCollection.doc<Gado>(doc.id).update({peso: peso});
+      });
+    }
+  }
+
+  addVacinacao(id: string){
+
   }
 }

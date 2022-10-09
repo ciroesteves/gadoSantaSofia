@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 import { OperacoesService } from 'src/app/service/operacoes.service';
 
 @Component({
@@ -34,8 +35,11 @@ export class LotesPage implements OnInit {
   labelGraficoIdade: any[];
   colorGraficoPeso: any[];
 
-  constructor(private operacoesService: OperacoesService
-    ) {
+  constructor(
+    private operacoesService: OperacoesService,
+    private loginService: AutenticacaoService,
+  ) { 
+    this.loginService.verificaLogged();
       this.dataAtual = new Date();
       this.animaisSubscription = this.operacoesService.getAnimais().subscribe(data => {
         this.animais = data;

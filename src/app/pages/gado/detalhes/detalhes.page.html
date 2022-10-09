@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{gado.nome}}</ion-title>
+    <ion-title style="background-color: #335020; font-size: 20px; color: white;">{{gado.nome}}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button color="light"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +12,7 @@
     <ion-card style="margin: 15px 20px; background-color: #558335;" *ngIf="gado.foto != ''">
       <ion-img style="height: 250px;" [src]="gado.foto"></ion-img>
     </ion-card>
-      <ion-item class="item-background-color">
+      <ion-item>
         <ion-label>Número</ion-label>
         <ion-input type="number" [(ngModel)]="gado.numero" readonly></ion-input>
       </ion-item>

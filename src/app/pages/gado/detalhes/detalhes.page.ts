@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Gado } from 'src/app/interfaces/gado';
+import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 import { OperacoesService } from 'src/app/service/operacoes.service';
 
 @Component({
@@ -36,7 +37,10 @@ export class DetalhesPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
-  ) {
+    private loginService: AutenticacaoService,
+  ) { 
+    this.loginService.verificaLogged();
+ 
     this.gadoId = this.activatedRoute.snapshot.params['id'];
 
     if (this.gadoId){

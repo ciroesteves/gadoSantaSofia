@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.page.html',
-  styleUrls: ['./menu.page.scss'],
+  selector: 'app-vacinacao',
+  templateUrl: './vacinacao.page.html',
+  styleUrls: ['./vacinacao.page.scss'],
 })
-export class MenuPage implements OnInit {
+export class VacinacaoPage implements OnInit {
 
   constructor(private loginService: AutenticacaoService,
     ) { 

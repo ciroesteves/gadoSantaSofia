@@ -9,8 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class HomePage implements OnInit {
 
   constructor(
-    private loginService: AutenticacaoService
-  ) { }
+    private loginService: AutenticacaoService,
+  ) { 
+    this.loginService.verificaLogged();
+  }
 
   ngOnInit() {
   }

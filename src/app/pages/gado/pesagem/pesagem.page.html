@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Módulo de Pesagem</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card style="margin-top: 50px;">
+    <form [formGroup]="pesagemForm" (submit)="addPesoAnimal()">
+      <ion-item>
+        <ion-label>Identificador</ion-label>
+        <ion-input type="number" placeholder="Número do animal" formControlName="numero"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Data</ion-label>
+        <ion-input type="date" formControlName="data"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Peso</ion-label>
+        <ion-input type="number" placeholder="Peso em Kg" formControlName="peso"></ion-input>
+      </ion-item>
+      <ion-button type="submit" [disabled]="pesagemForm.invalid" expand="block">Salvar</ion-button> 
+    <ion-button color="danger" [routerLink]="['/geral']" expand="block">Cancelar</ion-button> 
+    </form>
+  </ion-card>
+</ion-content>

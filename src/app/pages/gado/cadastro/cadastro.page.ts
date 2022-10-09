@@ -3,6 +3,7 @@ import { Gado } from 'src/app/interfaces/gado';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, NavController } from '@ionic/angular';
+import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -31,8 +32,9 @@ export class CadastroPage implements OnInit {
     private service: OperacoesService,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
-  ) {
-    
+    private loginService: AutenticacaoService,
+  ) { 
+    this.loginService.verificaLogged();
   }
 
   ngOnInit() {
