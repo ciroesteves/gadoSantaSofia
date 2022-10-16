@@ -88,7 +88,7 @@ export class DetalhesPage implements OnInit {
         this.dataCompra = this.formatDate(this.dataCompra);
       }
       if(this.gado.vendedor && this.gado.vendedor != ''){
-        this.compradorSubscription = this.financeiro.getCompradorNome(this.gado.vendedor).subscribe(data4 => {
+        this.compradorSubscription = this.financeiro.getFornecedor(this.gado.vendedor).subscribe(data4 => {
           this.vendedor = data4;
           this.nomeVendedor = this.vendedor.nome;
         });
@@ -108,15 +108,6 @@ export class DetalhesPage implements OnInit {
         data2.sort( compare );
         this.pesos = data2;
       })
-      /*
-      this.dataGraficoPeso = [{
-        data: [this.peso.peso],
-        label: 'Quantidade/ Faixa de Peso',
-        color: 'white'
-      }];
-      
-      this.labelGraficoPeso = [this.peso.data]
-      */
     }
     this.vacinasSubscription = this.operacoesService.getVacinacaoId(this.gadoId).subscribe(data3 => {
       function compare( a, b ) {
@@ -175,7 +166,6 @@ export class DetalhesPage implements OnInit {
       }],
     })
     await alert.present();
-    console.log(alert.buttons.values);
     return 
   }
 
@@ -201,7 +191,6 @@ export class DetalhesPage implements OnInit {
       }],
     })
     await alert.present();
-    console.log(alert.buttons.values);
     return 
   }
 
@@ -227,7 +216,6 @@ export class DetalhesPage implements OnInit {
       }],
     })
     await alert.present();
-    console.log(alert.buttons.values);
     return 
   }
 

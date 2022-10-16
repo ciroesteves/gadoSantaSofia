@@ -1,9 +1,60 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>cadastro</ion-title>
+    <ion-title style="background-color: #335020; font-size: 20px; color: white;">Cadastro de Fornecedor</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form [formGroup]="cadastroForm" (submit)="addFornecedor()">
+      <ion-item>
+        <ion-label>Nome</ion-label>
+        <ion-input formControlName="nome"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select formControlName="tipo" interface="popover" class="custom-options">
+          <ion-select-option value="Loja">Loja</ion-select-option>
+          <ion-select-option value="Açougue">Açougue</ion-select-option>
+          <ion-select-option value="Frigorífico">Frigorífico</ion-select-option>
+          <ion-select-option value="Comprador Animais">Comprador Animais</ion-select-option>
+          <ion-select-option value="Fornecedor Animais">Fornecedor Animai</ion-select-option>
+          <ion-select-option value="Compra/Venda">Compra/Venda</ion-select-option>
+          <ion-select-option value="Intermedário">Intermedário</ion-select-option>
+          <ion-select-option value="Veterinário">Veterinário</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Telefone</ion-label>
+        <ion-input formControlName="telefone"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>CPF/CNPJ</ion-label>
+        <ion-input formControlName="cpf"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lembrete</ion-label>
+        <ion-textarea rows="8" placeholder="Insira os dados extras..." formControlName="lembrete"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>Endereço</ion-label>
+        <ion-input formControlName="endereco"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bairro</ion-label>
+        <ion-input formControlName="bairro"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cidade</ion-label>
+        <ion-input formControlName="cidade"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>UF</ion-label>
+        <ion-input formControlName="uf"></ion-input>
+      </ion-item>
+    <ion-button type="submit" [disabled]="cadastroForm.invalid" expand="block">Salvar</ion-button> 
+    <ion-button color="danger" [routerLink]="['/compradores/geral']" expand="block">Cancelar</ion-button> 
+  </form>
 </ion-content>

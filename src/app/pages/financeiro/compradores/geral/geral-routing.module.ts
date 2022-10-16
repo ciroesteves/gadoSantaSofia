@@ -1,5 +1,7 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { GeralPage } from './geral.page';
 
@@ -11,7 +13,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes)
+  ],
   exports: [RouterModule],
 })
 export class GeralPageRoutingModule {}

@@ -194,4 +194,29 @@ export class OperacoesService {
     this.addstatus(id, 'vendido');
     return this.animaisCollection.doc(id).collection('venda').doc().set(formVenda);
   }
+
+  async getAnimaisVendedor(id: string){
+    const animais = await this.animaisCollection.ref.where('vendedor', '==', id).get();
+    if(animais.size > 0){
+      const alert = await this.alertController.create({
+        header: 'Erro',
+        subHeader: 'Falha na exclusão',
+        message: 'Fornecedor vinculado a negociações',
+        buttons: ['OK'],
+      });
+  
+      await alert.present();
+      return animais.size;
+    }else {
+      const alert = await this.alertController.create({
+        header: 'Sucesso',
+        subHeader: 'Exclusão finalizada',
+        message: 'Fornecedor foi excluído definitivamente',
+        buttons: ['OK'],
+      });
+  
+      await alert.present();
+      return animais.size;
+    }
+  }
 }

@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>geral</ion-title>
+    <ion-title style="background-color: #335020; font-size: 20px; color: white;">Fornecedores</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar [(ngModel)]="barraPesquisa">
 
+  </ion-searchbar>
+  <ion-list>
+    <ion-item-sliding *ngFor="let fornecedor of fornecedores | filter:barraPesquisa">
+      <ion-item  style="font-size: large;" button [routerLink]="['/compradores/detalhes', fornecedor.id]">
+        <ion-label>
+          {{fornecedor.nome}}
+          <p>Tipo: {{fornecedor.tipo}} - Telefone: {{fornecedor.telefone}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+    <ion-fab-button button [routerLink]="['/compradores/cadastro']"><ion-icon name="add-outline"></ion-icon></ion-fab-button>
+  </ion-fab>
 </ion-content>

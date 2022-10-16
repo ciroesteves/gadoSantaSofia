@@ -24,10 +24,6 @@
         <ion-input type="text" [(ngModel)]="gado.sexo" readonly></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Peso</ion-label>
-        <ion-input type="number" [(ngModel)]="gado.peso" readonly></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-label>Raça</ion-label>
         <ion-input [(ngModel)]="gado.raca" readonly></ion-input>
       </ion-item>
@@ -54,11 +50,11 @@
         <ion-label>Status</ion-label>
         <ion-input [(ngModel)]="gado.status" readonly></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="gado.vendedor != ''">
         <ion-label>Adquirido de </ion-label>
           <ion-input [(ngModel)]="nomeVendedor" readonly></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="gado.valor != 0 || gado.valor != ''">
         <ion-label>Preço de Compra</ion-label>
         <ion-input [(ngModel)]="gado.valor" readonly></ion-input>
       </ion-item>

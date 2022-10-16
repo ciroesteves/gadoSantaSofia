@@ -1,3 +1,4 @@
+import { FinanceiroService } from 'src/app/service/financeiro.service';
 import { OperacoesService } from 'src/app/service/operacoes.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -19,6 +20,8 @@ export class EdicaoPage implements OnInit {
   private productSubscription: Subscription;
   edicaoForm: FormGroup;
   public nasc;
+  public dataCompra;
+  vendedores = new Array();
 
   constructor(
     private builder: FormBuilder,
@@ -27,12 +30,16 @@ export class EdicaoPage implements OnInit {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private loginService: AutenticacaoService,
+    private financeiroService: FinanceiroService
   ) { 
     this.loginService.verificaLogged();
     this.gadoId = this.activatedRoute.snapshot.params['id'];
 
     if (this.gadoId){
       this.carregarAnimal();
+      this.financeiroService.getCompradores().subscribe(data => {
+        this.vendedores = data;
+      });
     } else{
       this.navCtrl.navigateBack('/geral');
     }
@@ -47,10 +54,12 @@ export class EdicaoPage implements OnInit {
       raca: [''],
       foto: [''],
       rascunho: [''],
-      peso: [''],
       sexo: ['', [Validators.required]],
       pai: [''],
       mae: [''],
+      vendedor: [''],
+      valor: [''],
+      dataCompra: ['']
     });
    }
 
@@ -59,7 +68,12 @@ export class EdicaoPage implements OnInit {
       this.gado = data;
       this.nasc = this.gado.nascimento;
       this.nasc = new Date(this.nasc.seconds * 1000);
-      this.nasc = this.formatDate(this.nasc)
+      this.nasc = this.formatDate(this.nasc);
+      if(this.gado.dataCompra != '' && this.gado.dataCompra != null && this.gado.dataCompra != ''){
+        this.dataCompra = this.gado.dataCompra;
+        this.dataCompra = new Date(this.dataCompra.seconds * 1000);
+        this.dataCompra = this.formatDate(this.dataCompra);
+      }     
       this.edicaoForm.patchValue({
       numero: this.gado.numero,
       nome: this.gado.nome,
@@ -68,10 +82,12 @@ export class EdicaoPage implements OnInit {
       raca: this.gado.raca,
       foto: this.gado.foto,
       rascunho: this.gado.rascunho,
-      peso: this.gado.peso,
       sexo: this.gado.sexo,
       pai: this.gado.pai,
       mae: this.gado.mae,
+      vendedor: this.gado.vendedor,
+      valor: this.gado.valor,
+      dataCompra: this.dataCompra
       });
     });
   }
@@ -105,6 +121,12 @@ export class EdicaoPage implements OnInit {
     const animais = this.edicaoForm.value;
     animais.nascimento = new Date(animais.nascimento);
     animais.nascimento.setDate(animais.nascimento.getDate() + 1)
+    if(animais.dataCompra){
+      animais.dataCompra = new Date(animais.dataCompra);
+      animais.dataCompra.setDate(animais.dataCompra.getDate() + 1)
+    } else {
+      animais.dataCompra = '';
+    }
     await this.presentLoading();
     await this.operacoesService.updateAnimal(this.gadoId, animais);
     await this.loading.dismiss();

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="background-color: #335020; font-size: 20px; color: white;">{{fornecedor.nome}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<body style="margin-top:10%; height: 100%; background-color: #558335;">
+  <ion-grid style="background-color: #558335;">
+    <ion-row style="margin-bottom: 60px;">
+      <ion-col>
+        <ion-fab horizontal="center">
+          <ion-fab-button [routerLink]="['/compradores/edicao', fornecedorId]">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+      <ion-col>
+        <ion-fab horizontal="center">
+          <ion-fab-button color="danger" (click)="deletarFornecedor()">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+    </ion-row>
+      <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-input type="text" [(ngModel)]="fornecedor.tipo" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Telefone</ion-label>
+        <ion-input [(ngModel)]="fornecedor.telefone" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>CPF/CNPJ</ion-label>
+        <ion-input [(ngModel)]="fornecedor.cpf" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lembrete</ion-label>
+        <ion-textarea rows="8" [(ngModel)]="fornecedor.lembrete" readonly></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>Endereço</ion-label>
+        <ion-input [(ngModel)]="fornecedor.endereco" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bairro</ion-label>
+        <ion-input [(ngModel)]="fornecedor.bairro" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cidade</ion-label>
+        <ion-input [(ngModel)]="fornecedor.cidade" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>UF</ion-label>
+        <ion-input [(ngModel)]="fornecedor.uf" readonly></ion-input>
+      </ion-item>
+  </ion-grid>
+</body>

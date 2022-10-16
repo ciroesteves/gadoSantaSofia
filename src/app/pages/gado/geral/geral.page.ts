@@ -1,5 +1,4 @@
 import { OperacoesService } from 'src/app/service/operacoes.service';
-import { Gado } from 'src/app/interfaces/gado';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';

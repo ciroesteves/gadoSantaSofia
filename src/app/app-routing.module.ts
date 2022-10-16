@@ -14,22 +14,11 @@ const routes: Routes = [
   {path: 'menuMetrica', loadChildren: () => import('./pages/metricas/menu/menu.module').then( m => m.MenuPageModule)},
   {path: 'pesagem', loadChildren: () => import('./pages/gado/pesagem/pesagem.module').then( m => m.PesagemPageModule)},
   {path: 'vacinacao', loadChildren: () => import('./pages/gado/vacinacao/vacinacao.module').then( m => m.VacinacaoPageModule)},
-  {
-    path: 'geral',
-    loadChildren: () => import('./pages/financeiro/compradores/geral/geral.module').then( m => m.GeralPageModule)
-  },
-  {
-    path: 'cadastro',
-    loadChildren: () => import('./pages/financeiro/compradores/cadastro/cadastro.module').then( m => m.CadastroPageModule)
-  },
-  {
-    path: 'edicao',
-    loadChildren: () => import('./pages/financeiro/compradores/edicao/edicao.module').then( m => m.EdicaoPageModule)
-  },
-  {
-    path: 'menu',
-    loadChildren: () => import('./pages/financeiro/menu/menu.module').then( m => m.MenuPageModule)
-  },
+  {path: 'compradores/geral', loadChildren: () => import('./pages/financeiro/compradores/geral/geral.module').then( m => m.GeralPageModule)},
+  {path: 'compradores/cadastro', loadChildren: () => import('./pages/financeiro/compradores/cadastro/cadastro.module').then( m => m.CadastroPageModule)},
+  {path: 'compradores/edicao/:id', loadChildren: () => import('./pages/financeiro/compradores/edicao/edicao.module').then( m => m.EdicaoPageModule)},
+  {path: 'menuFinanceiro', loadChildren: () => import('./pages/financeiro/menu/menu.module').then( m => m.MenuPageModule)},
+  {path: 'compradores/detalhes/:id', loadChildren: () => import('./pages/financeiro/compradores/detalhes/detalhes.module').then( m => m.DetalhesPageModule)},
 ];
 
 @NgModule({
