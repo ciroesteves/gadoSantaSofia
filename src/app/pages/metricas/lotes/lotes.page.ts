@@ -10,7 +10,7 @@ import { OperacoesService } from 'src/app/service/operacoes.service';
 export class LotesPage implements OnInit {
   animaisSubscription: any;
   dataAtual: Date;
-  animais: { numero: number; nome: string; raca: string; sexo: string; nascimento: Date; peso: number; lote: string; rascunho: string; pai: number; mae: number; foto: any; id: string; }[];
+  animais: any;
   countMacho: number;
   countFemea: number;
   countAte8: number;

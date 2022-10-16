@@ -1,4 +1,4 @@
 export interface Pesagem {
-    data: Date,
-    peso: number
+    data: any,
+    peso: number,
 }

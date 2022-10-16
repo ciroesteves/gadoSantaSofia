@@ -1,9 +1,11 @@
+import { FinanceiroService } from './../../../service/financeiro.service';
 import { OperacoesService } from 'src/app/service/operacoes.service';
 import { Gado } from 'src/app/interfaces/gado';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, NavController } from '@ionic/angular';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-cadastro',
@@ -11,22 +13,10 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
   styleUrls: ['./cadastro.page.scss'],
 })
 export class CadastroPage implements OnInit {
-  public gado: Gado = {
-    numero: 0,
-    nome: '',
-    raca: '',
-    sexo: '',
-    nascimento: undefined,
-    peso: 0,
-    lote: '',
-    rascunho: '',
-    pai: 0,
-    mae: 0,
-    foto: '',
-    status: ''
-  };
+  public gado: any;
   private loading: any;
   cadastroForm: FormGroup;
+  public vendedores = new Array();
 
   constructor(
     private builder: FormBuilder,
@@ -34,8 +24,12 @@ export class CadastroPage implements OnInit {
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
     private loginService: AutenticacaoService,
+    private financeiroService: FinanceiroService
   ) { 
     this.loginService.verificaLogged();
+    this.financeiroService.getCompradores().subscribe(data => {
+      this.vendedores = data;
+    });
   }
 
   ngOnInit() {
@@ -47,10 +41,12 @@ export class CadastroPage implements OnInit {
       raca: [''],
       foto: [''],
       rascunho: [''],
-      peso: [''],
       sexo: ['', [Validators.required]],
       pai: [''],
       mae: [''],
+      vendedor: [''],
+      valor: [''],
+      dataCompra: ['']
     });
   }
 
@@ -67,6 +63,8 @@ export class CadastroPage implements OnInit {
   async addAnimal(){
     const animais = this.cadastroForm.value;
     animais.nascimento = new Date(animais.nascimento);
+    animais.dataCompra = new Date(animais.dataCompra);
+    animais.status = 'vivo';
     this.service.addAnimal(animais);
     this.cadastroForm.reset();
     this.navCtrl.navigateBack('/geral');

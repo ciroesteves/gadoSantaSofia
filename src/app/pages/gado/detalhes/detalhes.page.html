@@ -12,6 +12,9 @@
     <ion-card style="margin: 15px 20px; background-color: #558335;" *ngIf="gado.foto != ''">
       <ion-img style="height: 250px;" [src]="gado.foto"></ion-img>
     </ion-card>
+    <ion-card style="margin: 15px 20px; background-color: #558335;" *ngIf="gado.foto == ''">
+      <ion-img style="height: 250px;" src="https://img.icons8.com/ios/500/year-of-ox.png"></ion-img>
+    </ion-card>
       <ion-item>
         <ion-label>Número</ion-label>
         <ion-input type="number" [(ngModel)]="gado.numero" readonly></ion-input>
@@ -47,6 +50,179 @@
         <ion-label>Mãe</ion-label>
         <ion-input [(ngModel)]="gado.mae" readonly></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-input [(ngModel)]="gado.status" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Adquirido de </ion-label>
+          <ion-input [(ngModel)]="nomeVendedor" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Preço de Compra</ion-label>
+        <ion-input [(ngModel)]="gado.valor" readonly></ion-input>
+      </ion-item>
+      <ion-item *ngIf="dataCompra != '' && dataCompra != null">
+        <ion-label>Data de Compra</ion-label>
+        <ion-input type="date" [(ngModel)]="dataCompra" readonly></ion-input>
+      </ion-item>
+      <ion-row style="margin-top: 10px;">
+        <ion-col style="text-align:center">
+          <ion-button class="botao-menu" id="open-modal-pesagem"><ion-icon name="scale-outline"></ion-icon></ion-button>
+        </ion-col>
+        <ion-col style="text-align:center">
+          <ion-button class="botao-menu" id="open-modal-vacinacao"><ion-icon name="medkit-outline"></ion-icon></ion-button>
+        </ion-col>
+      </ion-row>
   </ion-grid>
-    
+  <ion-modal trigger="open-modal-pesagem">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Voltar</ion-button>
+          </ion-buttons>
+          <ion-title>Pesagem do {{gado.nome}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list lines="none">
+          <ion-item-sliding *ngFor="let peso of pesos">
+            <ion-item style="font-size: large;">
+              <ion-label>
+                <ion-row>
+                  <ion-col>
+                    {{(peso.data.seconds+(3*60*60))*1000 | date:'dd/MM/yyyy'}}
+                  </ion-col>
+                  <ion-col>
+                    {{peso.peso}} Kg
+                  </ion-col>
+                </ion-row>
+              </ion-label>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal trigger="open-modal-vacinacao">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Voltar</ion-button>
+          </ion-buttons>
+          <ion-title>Vacinação do {{gado.nome}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list lines="none">
+          <ion-item-sliding *ngFor="let vacina of vacinas">
+            <ion-list-header>
+              <ion-label>{{vacina.id}}</ion-label>
+            </ion-list-header>
+            <ion-item style="font-size: large;">
+              <ion-label>
+                <ion-row>
+                  <ion-col>
+                    {{(vacina.data.seconds+(3*60*60))*1000 | date:'dd/MM/yyyy'}}
+                  </ion-col>
+                </ion-row>
+              </ion-label>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal trigger="open-modal-venda">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Voltar</ion-button>
+          </ion-buttons>
+          <ion-title>Comunicar Venda</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form [formGroup]="vendaForm" (submit)="venderAnimal()">
+          <ion-item>
+            <ion-label>Comprador</ion-label>
+            <ion-select formControlName="comprador" interface="popover" class="custom-options">
+              <ion-select-option *ngFor="let comprador of compradores" value={{comprador.id}}>{{comprador.nome}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Valor</ion-label>
+            <ion-input type="number" formControlName="valor"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Data</ion-label>
+            <ion-input type="date" formControlName="data"></ion-input>
+          </ion-item>
+        <ion-item>
+          <ion-label>Nota de Transporte</ion-label>
+          <ion-input formControlName="notaTransporte"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nota de Venda</ion-label>
+          <ion-input formControlName="notaVenda"></ion-input>
+        </ion-item>
+          <ion-button type="submit" [disabled]="vendaForm.invalid" expand="block">Salvar</ion-button> 
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal trigger="open-modal-morte">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Voltar</ion-button>
+          </ion-buttons>
+          <ion-title>Comunicar Falecimento</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form [formGroup]="morteForm" (submit)="comunicarMorteAnimal()">
+          <ion-item>
+            <ion-label>Motivo</ion-label>
+            <ion-select formControlName="motivo" interface="popover" class="custom-options">
+              <ion-select-option value="Doença">Doença</ion-select-option>
+              <ion-select-option value="Manejo">Manejo</ion-select-option>
+              <ion-select-option value="Acidente">Acidente</ion-select-option>
+              <ion-select-option value="Idade">Idade</ion-select-option>
+              <ion-select-option value="Outros">Outros</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Detalhes</ion-label>
+            <ion-textarea rows="8" placeholder="Insira os detalhes..." formControlName="detalhes"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label>Data</ion-label>
+            <ion-input type="date" formControlName="data"></ion-input>
+          </ion-item>
+          <ion-button type="submit" [disabled]="morteForm.invalid" expand="block">Salvar</ion-button> 
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>
+<ion-fab style="margin-top: 40px;" slot="fixed" horizontal="end" vertical="top">
+  <ion-fab-button [routerLink]="['/edicao', gadoId]"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
+</ion-fab>
+<ion-fab style="margin-top: 100px;" slot="fixed" horizontal="end" vertical="top">
+  <ion-fab-button color="warning" id="open-modal-venda"><ion-icon name="cash-outline"></ion-icon></ion-fab-button>
+</ion-fab>
+<ion-fab style="margin-top: 160px;" slot="fixed" horizontal="end" vertical="top">
+  <ion-fab-button color="dark" id="open-modal-morte"><ion-icon name="skull-outline"></ion-icon></ion-fab-button>
+</ion-fab>
+<ion-fab style="margin-top: 220px;" slot="fixed" horizontal="end" vertical="top">
+  <ion-fab-button color="danger" (click)="deletarAnimal()"><ion-icon name="trash-outline"></ion-icon></ion-fab-button>
+</ion-fab>

@@ -10,7 +10,7 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
   styleUrls: ['./geral.page.scss'],
 })
 export class GeralPage implements OnInit {
-  public animais = new Array<Gado>();
+  public animais = new Array();
 
   private animaisSubscription: Subscription;
   public dataAtual;

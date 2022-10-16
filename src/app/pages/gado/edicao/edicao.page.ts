@@ -14,20 +14,7 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 })
 export class EdicaoPage implements OnInit {
   private gadoId: string = null;
-  public gado: Gado = {
-    numero: 0,
-    nome: '',
-    raca: '',
-    sexo: '',
-    nascimento: undefined,
-    peso: 0,
-    lote: '',
-    rascunho: '',
-    pai: 0,
-    mae: 0,
-    foto: '',
-    status: ''
-  };
+  public gado: any;
   private loading: any;
   private productSubscription: Subscription;
   edicaoForm: FormGroup;

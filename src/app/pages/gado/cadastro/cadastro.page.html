@@ -25,21 +25,8 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label>Peso</ion-label>
-        <ion-input type="number" formControlName="peso"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Raça</ion-label>
-        <ion-input formControlName="raca"></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-label>Nascimento</ion-label>
         <ion-input type="date" formControlName="nascimento"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Foto</ion-label>
-        <ion-input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg,.jpeg" style="font-size: 10px;"></ion-input>
-        <ion-input hidden formControlName="foto" [name]="foto"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Lote</ion-label>
@@ -52,6 +39,15 @@
         </ion-select>
       </ion-item>
       <ion-item>
+        <ion-label>Raça</ion-label>
+        <ion-input formControlName="raca"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Foto</ion-label>
+        <ion-input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg,.jpeg" style="font-size: 10px;"></ion-input>
+        <ion-input hidden formControlName="foto" [name]="foto"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-textarea rows="8" placeholder="Insira os dados extras..." formControlName="rascunho"></ion-textarea>
       </ion-item>
       <ion-item>
@@ -61,6 +57,20 @@
       <ion-item>
         <ion-label>Mãe</ion-label>
         <ion-input formControlName="mae"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Vendedor</ion-label>
+        <ion-select formControlName="vendedor" interface="popover" class="custom-options">
+          <ion-select-option *ngFor="let vendedor of vendedores" value="{{vendedor.id}}">{{vendedor.nome}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Preço</ion-label>
+        <ion-input type="number" formControlName="valor"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Data de Compra</ion-label>
+        <ion-input type="date" formControlName="dataCompra"></ion-input>
       </ion-item>
     <ion-button type="submit" [disabled]="cadastroForm.invalid" expand="block">Salvar</ion-button> 
     <ion-button color="danger" [routerLink]="['/geral']" expand="block">Cancelar</ion-button> 

@@ -10,5 +10,6 @@ export interface Gado {
     pai: number,
     mae: number,
     foto: any,
-    status: string
+    status: string,
+    compra: any
 }
