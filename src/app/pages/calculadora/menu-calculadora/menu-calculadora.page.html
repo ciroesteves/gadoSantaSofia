@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="background-color: #335020; font-size: 20px; color: white;">Menu Calculadora</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="height: 100%;">
+  <ion-grid style="text-align: center; background-color: #558335; height: 100%; justify-content: center;">
+    <ion-button style="margin: 30px 0px; height: 50px;" expand="block" [routerLink]="['individual']">Simulador Venda Individual</ion-button>
+    <ion-button style="margin: 30px 0px; height: 50px;" expand="block" [routerLink]="['lotes']">Simulador Venda Lote</ion-button>
+    <ion-button style="margin: 30px 0px; height: 50px;" expand="block" [routerLink]="['alimentacao']">Simular Alimentação</ion-button>
+  </ion-grid>
+</ion-content>

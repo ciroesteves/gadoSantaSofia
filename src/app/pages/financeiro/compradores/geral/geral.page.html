@@ -13,7 +13,7 @@
   </ion-searchbar>
   <ion-list>
     <ion-item-sliding *ngFor="let fornecedor of fornecedores | filter:barraPesquisa">
-      <ion-item  style="font-size: large;" button [routerLink]="['/compradores/detalhes', fornecedor.id]">
+      <ion-item  style="font-size: large;" button [routerLink]="['/financeiro/compradores/detalhes', fornecedor.id]">
         <ion-label>
           {{fornecedor.nome}}
           <p>Tipo: {{fornecedor.tipo}} - Telefone: {{fornecedor.telefone}}</p>
@@ -22,6 +22,6 @@
     </ion-item-sliding>
   </ion-list>
   <ion-fab slot="fixed" horizontal="end" vertical="bottom">
-    <ion-fab-button button [routerLink]="['/compradores/cadastro']"><ion-icon name="add-outline"></ion-icon></ion-fab-button>
+    <ion-fab-button button [routerLink]="['/financeiro/compradores/cadastro']"><ion-icon name="add-outline"></ion-icon></ion-fab-button>
   </ion-fab>
 </ion-content>
