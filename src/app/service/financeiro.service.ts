@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { AutenticacaoService } from './autenticacao.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,6 @@ export class FinanceiroService {
   
   constructor(
     private db: AngularFirestore,
-    private alertController: AlertController
   ) {
       this.compradoresCollection = this.db.collection('compradores');
   }
@@ -24,7 +24,7 @@ export class FinanceiroService {
             const id = a.payload.doc.id;
           return { id, ...data };
         });
-      })/////
+      })
     )
   }
 
@@ -42,6 +42,22 @@ export class FinanceiroService {
 
   deleteFornecedor(id: string){
     return this.compradoresCollection.doc(id).delete();
+  }
+
+  async addcustoFornecedor(id: string, custo: any){
+    return await this.compradoresCollection.doc(id).collection('custo').doc().set({tipo: custo.tipo, data: custo.data, valor: custo.valor})
+  }
+
+  getCustosFornecedor(id: string){
+    return this.compradoresCollection.doc(id).collection('custo').snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    )
   }
 
 }

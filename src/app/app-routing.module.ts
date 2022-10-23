@@ -19,6 +19,7 @@ const routes: Routes = [
   {path: 'compradores/edicao/:id', loadChildren: () => import('./pages/financeiro/compradores/edicao/edicao.module').then( m => m.EdicaoPageModule)},
   {path: 'menuFinanceiro', loadChildren: () => import('./pages/financeiro/menu/menu.module').then( m => m.MenuPageModule)},
   {path: 'compradores/detalhes/:id', loadChildren: () => import('./pages/financeiro/compradores/detalhes/detalhes.module').then( m => m.DetalhesPageModule)},
+  {path: 'custos/cadastro', loadChildren: () => import('./pages/financeiro/custo/cadastro/cadastro.module').then( m => m.CadastroPageModule)},
 ];
 
 @NgModule({

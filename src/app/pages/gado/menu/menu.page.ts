@@ -1,3 +1,4 @@
+import { OperacoesService } from 'src/app/service/operacoes.service';
 import { Component, OnInit } from '@angular/core';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 
@@ -9,7 +10,7 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 export class MenuPage implements OnInit {
 
   constructor(
-    private loginService: AutenticacaoService,
+    private loginService: AutenticacaoService
     ) { 
       this.loginService.verificaLogged(); }
 

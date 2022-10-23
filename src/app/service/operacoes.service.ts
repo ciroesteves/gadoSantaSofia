@@ -5,8 +5,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { map } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,36 +17,7 @@ export class OperacoesService {
     private storage: AngularFireStorage,
     private alertController: AlertController
   ) {
-      this.animaisCollection = this.db.collection('gado');
-     }
-
-  imageName(){
-    const newTime = Math.floor(Date.now() / 1000);
-    return String(Math.floor(Math.random() * 20) + newTime);
-  }
-
-  async storeImage(imageData: any) {
-    const imageName = this.imageName();
-    return new Promise((resolve, reject) => {
-      const pictureRef = this.storage.ref(this.location + imageName);
-      pictureRef.put(imageData).then(function () {
-        pictureRef.getDownloadURL().subscribe((url: any) => {
-          resolve(url);
-        });
-      });
-    })
-  }
-
-  getAnimais(){
-    return this.animaisCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    )
+    this.animaisCollection = this.db.collection('gado');
   }
 
   async addAnimal(gado: any) {
@@ -72,7 +41,20 @@ export class OperacoesService {
       });
       await alert.present();
       return;
+    
     }
+  }
+
+  getAnimais(){
+    return this.animaisCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+            let data = a.payload.doc.data();
+            let id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    )
   }
 
   getAnimalId(id: string) {
@@ -89,7 +71,7 @@ export class OperacoesService {
   }
 
   async getanimalNumero(numero: number){
-    return this.db.collection('gado').ref.where('numero', '==', numero).where('status', '==', 'vivo').get();
+    return this.animaisCollection.ref.where('numero', '==', numero).where('status', '==', 'vivo').get();
   }
 
   async addPesagem(numero: number, pesagem: Pesagem){
@@ -158,7 +140,7 @@ export class OperacoesService {
   }
 
   getPesagemId(id: string){
-    return this.db.collection('gado').doc(id).collection('pesagem').snapshotChanges().pipe(
+    return this.animaisCollection.doc(id).collection('pesagem').snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
             const data = a.payload.doc.data();
@@ -170,7 +152,7 @@ export class OperacoesService {
   }
 
   getVacinacaoId(id: string){
-    return this.db.collection('gado').doc(id).collection('vacinacao').snapshotChanges().pipe(
+    return this.animaisCollection.doc(id).collection('vacinacao').snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
             const data = a.payload.doc.data();
@@ -182,7 +164,7 @@ export class OperacoesService {
   }
 
   addstatus(id: string, statusAnimal: string){
-    return this.db.collection('gado').doc(id).update({status: statusAnimal});
+    return this.animaisCollection.doc(id).update({status: statusAnimal});
   }
 
   addDadosMorte(id: string, formMorte: any){
@@ -218,5 +200,22 @@ export class OperacoesService {
       await alert.present();
       return animais.size;
     }
+  }
+
+  imageName(){
+    const newTime = Math.floor(Date.now() / 1000);
+    return String(Math.floor(Math.random() * 20) + newTime);
+  }
+
+  async storeImage(imageData: any) {
+    const imageName = this.imageName();
+    return new Promise((resolve, reject) => {
+      const pictureRef = this.storage.ref(this.location + imageName);
+      pictureRef.put(imageData).then(function () {
+        pictureRef.getDownloadURL().subscribe((url: any) => {
+          resolve(url);
+        });
+      });
+    })
   }
 }

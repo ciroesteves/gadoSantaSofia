@@ -19,6 +19,13 @@
       </ion-col>
       <ion-col>
         <ion-fab horizontal="center">
+          <ion-fab-button color="warning" id="open-modal-custos">
+            <ion-icon name="logo-usd"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+      <ion-col>
+        <ion-fab horizontal="center">
           <ion-fab-button color="danger" (click)="deletarFornecedor()">
             <ion-icon name="trash-outline"></ion-icon>
           </ion-fab-button>
@@ -58,4 +65,49 @@
         <ion-input [(ngModel)]="fornecedor.uf" readonly></ion-input>
       </ion-item>
   </ion-grid>
+
+  <ion-modal trigger="open-modal-custos">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Voltar</ion-button>
+          </ion-buttons>
+          <ion-title>Custos Vinculados</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-row>
+          <ion-col style="text-align: center;">
+            Tipo
+          </ion-col>
+          <ion-col style="text-align: center;">
+            Valor
+          </ion-col>
+          <ion-col style="text-align: center;">
+            Data
+          </ion-col>
+        </ion-row>
+        <ion-list lines="none">
+          <ion-item-sliding *ngFor="let custo of custos">
+            <ion-item style="font-size: large;">
+              <ion-label>
+                <ion-row>
+                  <ion-col style="text-align: center;">
+                    {{custo.tipo}}
+                  </ion-col>
+                  <ion-col style="text-align: center;">
+                    {{custo.valor | currency:'BRL'}}
+                  </ion-col>
+                  <ion-col style="text-align: center;">
+                    {{(custo.data.seconds+(3*60*60))*1000 | date:'dd/MM/yyyy'}}
+                  </ion-col>
+                </ion-row>
+              </ion-label>
+            </ion-item>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </body>

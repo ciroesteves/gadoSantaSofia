@@ -63,7 +63,9 @@ export class CadastroPage implements OnInit {
   async addAnimal(){
     const animais = this.cadastroForm.value;
     animais.nascimento = new Date(animais.nascimento);
-    animais.dataCompra = new Date(animais.dataCompra);
+    if(animais.dataCompra != '' && animais.dataCompra != null){
+      animais.dataCompra = new Date(animais.dataCompra);
+    }
     animais.status = 'vivo';
     this.service.addAnimal(animais);
     this.cadastroForm.reset();

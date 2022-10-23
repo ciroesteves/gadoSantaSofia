@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="background-color: #335020; font-size: 20px; color: white;">Módulo de Pesagem</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<body style="background-color: #558335; ">
+  <ion-grid >
+    <ion-card style="margin-top: 150px; background-color: lightgray;">
+      <form [formGroup]="custoForm" (submit)="addCusto()">
+        <ion-item>
+          <ion-label>Fornecedor</ion-label>
+          <ion-select formControlName="fornecedor" interface="popover" class="custom-options">
+            <ion-select-option *ngFor="let fornecedor of fornecedores" value="{{fornecedor.id}}">{{fornecedor.nome}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Tipo</ion-label>
+          <ion-select formControlName="tipo" interface="popover" class="custom-options">
+            <ion-select-option value="Compra Animal">Compra Animal</ion-select-option>
+            <ion-select-option value="Veterinário">Veterinário</ion-select-option>
+            <ion-select-option value="Alimentação">Alimentação</ion-select-option>
+            <ion-select-option value="Medicação">Medicação</ion-select-option>
+            <ion-select-option value="Manutenção">Manutenção</ion-select-option>
+            <ion-select-option value="Custo Básico">Custo Básico</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Data</ion-label>
+          <ion-input type="date" formControlName="data"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Valor</ion-label>
+          <ion-input type="number" placeholder="" formControlName="valor"></ion-input>
+        </ion-item>
+        <ion-button type="submit" [disabled]="custoForm.invalid" expand="block">Salvar</ion-button> 
+      </form>
+      <ion-button color="danger" (click)="limparForm()" expand="block">Limpar</ion-button> 
+    </ion-card>
+  </ion-grid>
+</body>

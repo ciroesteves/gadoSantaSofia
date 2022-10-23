@@ -1,7 +1,7 @@
 import { OperacoesService } from 'src/app/service/operacoes.service';
+import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 
 @Component({
   selector: 'app-geral',
@@ -10,9 +10,9 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 })
 export class GeralPage implements OnInit {
   public animais = new Array();
-
   private animaisSubscription: Subscription;
   public dataAtual;
+
   constructor(
     private operacoesService: OperacoesService,
     private loginService: AutenticacaoService,
@@ -34,9 +34,7 @@ export class GeralPage implements OnInit {
     })
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   ngOnDestroy(){
     this.animaisSubscription.unsubscribe();

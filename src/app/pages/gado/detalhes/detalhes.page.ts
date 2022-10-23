@@ -14,25 +14,25 @@ import { FinanceiroService } from 'src/app/service/financeiro.service';
   styleUrls: ['./detalhes.page.scss'],
 })
 export class DetalhesPage implements OnInit {
-  morteForm: FormGroup;
-  vendaForm: FormGroup;
-  private gadoId: string = null;
-  public gado: any = {
-    peso: 0
-  }
-  private loading: any;
   private productSubscription: Subscription;
   private compradorSubscription: Subscription;
-  detalheForm: FormGroup;
-  public nasc;
-  public dataCompra;
-  public nomeVendedor;
-  public pesos = new Array();
-  public vacinas = new Array();
   private pesosSubscription: Subscription;
   private vacinasSubscription: Subscription;
-  public compradores = new Array();
-  vendedor: any;
+  private morteForm: FormGroup;
+  private vendaForm: FormGroup;
+  private detalheForm: FormGroup;
+  private gadoId: string = null;
+  private gado: any = {
+    peso: 0,
+  }
+  private vendedor: any;
+  private loading: any;
+  private nasc;
+  private dataCompra;
+  private nomeVendedor;
+  private pesos = new Array();
+  private vacinas = new Array();
+  private compradores = new Array();
 
   constructor(
     private financeiro: FinanceiroService,
@@ -44,10 +44,8 @@ export class DetalhesPage implements OnInit {
     private loadingCtrl: LoadingController,
     private loginService: AutenticacaoService,
     private builder: FormBuilder,
-  ) { 
-
+  ) {
     this.loginService.verificaLogged();
- 
     this.gadoId = this.activatedRoute.snapshot.params['id'];
 
     if (this.gadoId){

@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 import { FinanceiroService } from 'src/app/service/financeiro.service';
 import { OperacoesService } from 'src/app/service/operacoes.service';
@@ -24,6 +24,7 @@ export class DetalhesPage implements OnInit {
     cidade: '',
     uf: '',
   };
+  public custos = new Array();
   private fornecedoresSubscription: Subscription;
 
   constructor(
@@ -33,6 +34,7 @@ export class DetalhesPage implements OnInit {
     private loginService: AutenticacaoService,
     private alertController: AlertController,
     private operacoesService: OperacoesService,
+    private modalCtrl: ModalController,
   ) { 
 
     this.loginService.verificaLogged();
@@ -53,6 +55,19 @@ export class DetalhesPage implements OnInit {
   carregarFornecedor() {
     this.fornecedoresSubscription = this.financeiroService.getFornecedor(this.fornecedorId).subscribe(data => {
       this.fornecedor = data;     
+    });
+    this.fornecedoresSubscription = this.financeiroService.getCustosFornecedor(this.fornecedorId).subscribe(data2 => {
+      function compare( a, b ) {
+        if ( a.data < b.data ){
+          return -1;
+        }
+        if ( a.data > b.data ){
+          return 1;
+        }
+        return 0;
+      }
+      data2.sort( compare );
+      this.custos = data2;
     });
   }
 
@@ -85,4 +100,8 @@ export class DetalhesPage implements OnInit {
     await alert.present();
     return 
   }
-}
+
+  cancel() {
+    this.modalCtrl.dismiss();
+  }
+} 

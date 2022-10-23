@@ -27,7 +27,7 @@ export class CadastroPage implements OnInit {
     this.cadastroForm = this.builder.group({
       nome: ['', [Validators.required]],
       tipo: ['', [Validators.required]],
-      telefone: ['', [Validators.required]],
+      telefone: [''],
       lembrete: [''],
       endereco: [''],
       bairro: [''],

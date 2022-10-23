@@ -40,7 +40,7 @@ export class EdicaoPage implements OnInit {
     this.edicaoForm = this.builder.group({
       nome: ['', [Validators.required]],
       tipo: ['', [Validators.required]],
-      telefone: ['', [Validators.required]],
+      telefone: [''],
       lembrete: [''],
       endereco: [''],
       bairro: [''],
