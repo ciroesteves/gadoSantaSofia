@@ -155,7 +155,7 @@ export class DetalhesPage implements OnInit {
         role: 'confirm',
         handler: () => {  
           this.operacoesService.deleteAnimalId(this.gadoId);
-          this.navCtrl.navigateBack('/geral')
+          this.navCtrl.navigateBack('/gado/geral')
         } 
       },
      {
@@ -180,7 +180,7 @@ export class DetalhesPage implements OnInit {
           morte.data = new Date(morte.data); 
           this.operacoesService.addDadosMorte(this.gadoId, morte);
           this.cancel();
-          this.navCtrl.navigateBack('/geral');
+          this.navCtrl.navigateBack('/gado/geral');
         } 
       },
      {
@@ -205,7 +205,7 @@ export class DetalhesPage implements OnInit {
           venda.data = new Date(venda.data); 
           this.operacoesService.addDadosVenda(this.gadoId, venda);
           this.cancel();
-          this.navCtrl.navigateBack('/geral');
+          this.navCtrl.navigateBack('/gado/geral');
         } 
       },
      {

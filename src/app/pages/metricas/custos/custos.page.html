@@ -9,71 +9,111 @@
 
 <ion-content>
   <ion-grid style="background-color: #558335;">
+    <ion-card style="height: 150px;">
+      <ion-card-title center >Receita Anual</ion-card-title>
+      <ion-row style="margin-top: 40px;">
+        <ion-col size="6" class="campo">
+          Venda de Animais
+        </ion-col>
+        <ion-col size="4">
+          {{lucroBruto | currency:'BRL'}}
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
     <ion-card>
-      <ion-card-title center>Custo por Tipo</ion-card-title>
-      <ion-row>
-        <ion-col size="4" class="campo">
+      <ion-card-title center >Custo Anual</ion-card-title>
+      <ion-row style="margin-top: 30px;">
+        <ion-col size="6" class="campo">
           Custo Total
         </ion-col>
-        <ion-col size="5">
-          {{custoTotal}}
+        <ion-col size="4">
+          {{custoTotal | currency:'BRL'}}
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="4" class="campo">
+        <ion-col size="6" class="campo">
           Compra de Animais
         </ion-col>
-        <ion-col size="5">
-          {{custoComp}}
+        <ion-col size="4">
+          {{custoComp | currency:'BRL'}}
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="4" class="campo">
+        <ion-col size="6" class="campo">
           Veterinário
         </ion-col>
-        <ion-col size="5">
-          {{custoVet}}
+        <ion-col size="4">
+          {{custoVet | currency:'BRL'}}
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="4" class="campo">
+        <ion-col size="6" class="campo">
           Alimentação
         </ion-col>
-        <ion-col size="5">
-          {{custoAli}}
+        <ion-col size="4">
+          {{custoAli | currency:'BRL'}}
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="4" class="campo">
+        <ion-col size="6" class="campo">
           Medicação
         </ion-col>
-        <ion-col size="5">
-          {{custoMed}}
+        <ion-col size="4">
+          {{custoMed | currency:'BRL'}}
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="4" class="campo">
+        <ion-col size="6" class="campo">
           Manutenção
         </ion-col>
-        <ion-col size="5">
-          {{custoMan}}
+        <ion-col size="4">
+          {{custoMan | currency:'BRL'}}
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="4" class="campo">
+        <ion-col size="6" class="campo">
           Custo básico
         </ion-col>
-        <ion-col size="5">
-          {{custoBasico}}
+        <ion-col size="4">
+          {{custoBasico | currency:'BRL'}}
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row style="margin-top: 50px;">
         <canvas style="margin: 20px 40px" baseChart 
         [datasets]= "dataGraficoCustoxTipo"
         [labels]="labelGraficoCustoxTipo"
         [legend]=false
         [type]="'bar'">
         </canvas>
+      </ion-row>
+    </ion-card>
+
+    <ion-card style="height: 250px;">
+      <ion-card-title center >Balanço Financeiro</ion-card-title>
+      <ion-row style="margin-top: 40px;">
+        <ion-col size="6" class="campo">
+          Receita Total
+        </ion-col>
+        <ion-col size="4">
+          {{lucroBruto | currency:'BRL'}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" class="campo">
+          Custo Total
+        </ion-col>
+        <ion-col size="4">
+          {{custoTotal | currency:'BRL'}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" class="campo">
+          Balanço
+        </ion-col>
+        <ion-col size="4">
+          {{(lucroBruto-custoTotal) | currency:'BRL'}}
+        </ion-col>
       </ion-row>
     </ion-card>
   </ion-grid>

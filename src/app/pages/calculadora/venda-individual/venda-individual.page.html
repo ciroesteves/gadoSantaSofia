@@ -1,9 +1,79 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>vendaIndividual</ion-title>
+    <ion-title style="background-color: #335020; font-size: 20px; color: white;">Simulador Individual</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<body style="background-color: #558335; ">
+  <ion-grid>
 
-</ion-content>
+    <ion-segment style="margin-top: 100px; background-color: #335020;" (ionChange)="segmentChanged($event)"
+      [(ngModel)]="segment" color="primary">
+      <ion-segment-button value="0">
+        <ion-label>Tradicional</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        <ion-label>Customizado</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-slides #slides (ionSlideDidChange)="slideChanged()">
+      <ion-slide>
+        <ion-card style="background-color: lightgray;">
+          <form [formGroup]="simuladorForm1" (submit)="calcularPrecoVendaTipo1()">
+            <ion-item>
+              <ion-label style="width: 100px;">Identificador</ion-label>
+              <ion-input type="number" placeholder="Número do animal" formControlName="numero"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label style="width: 100px;">Preço</ion-label>
+              <ion-input type="number" placeholder="Preço por Arroba" formControlName="preco"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label style="width: 100px;">Rendimento</ion-label>
+              <ion-input type="number" placeholder="Rendimento de carcaça esperado em %" formControlName="rendimento">
+              </ion-input>
+            </ion-item>
+            <ion-button type="submit" [disabled]="simuladorForm1.invalid" expand="block">Calcular</ion-button>
+          </form>
+          <ion-button color="danger" (click)="limparForm()" expand="block">Limpar</ion-button>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card style="background-color: lightgray;">
+          <form [formGroup]="simuladorForm2" (submit)="calcularPrecoVendaTipo2()">
+            <ion-item>
+              <ion-label style="width: 100px;">Peso</ion-label>
+              <ion-input type="number" placeholder="Peso do Animal" formControlName="peso"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label style="width: 100px;">Preço</ion-label>
+              <ion-input type="number" placeholder="Preço por Arroba" formControlName="preco"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label style="width: 100px;">Rendimento</ion-label>
+              <ion-input type="number" placeholder="Rendimento de carcaça esperado em %" formControlName="rendimento">
+              </ion-input>
+            </ion-item>
+            <ion-button type="submit" [disabled]="simuladorForm2.invalid" expand="block">Calcular</ion-button>
+          </form>
+          <ion-button color="danger" (click)="limparForm()" expand="block">Limpar</ion-button>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+
+    <ion-card style="background-color: lightgray;">
+        <ion-item>
+          <ion-label style="width: 150px;">Preço à Vista</ion-label>
+          <ion-input>{{precoVista | currency:'BRL'}}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label style="width: 150px;">Preço a Prazo</ion-label>
+          <ion-input>{{precoPrazo | currency:'BRL'}}</ion-input>
+        </ion-item>
+    </ion-card>
+  </ion-grid>
+</body>

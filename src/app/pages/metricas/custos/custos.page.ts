@@ -1,3 +1,4 @@
+import { OperacoesService } from 'src/app/service/operacoes.service';
 import { FinanceiroService } from 'src/app/service/financeiro.service';
 import { Component, OnInit } from '@angular/core';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
@@ -10,6 +11,7 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 export class CustosPage implements OnInit {
   private financasSubscription: any;
   private financas = new Array();
+  private lucros = new Array();
   private custoTotal = 0;
   private custoComp = 0;
   private custoVet = 0;
@@ -17,19 +19,37 @@ export class CustosPage implements OnInit {
   private custoMed = 0
   private custoAli = 0;
   private custoBasico = 0;
+  private lucroBruto = 0;
   dataGraficoCustoxTipo: { data: number[]; label: string; backgroundColor: string[]; color: string; }[];
   labelGraficoCustoxTipo: string[];
 
   constructor(
     private financeiroService: FinanceiroService,
     private loginService: AutenticacaoService,
+    private operacoesService: OperacoesService
   ) { 
     this.loginService.verificaLogged();
     this.carregarCustoTotal();
-
+    this.carregarLucroBruto();
   }
 
   ngOnInit() {
+  }
+
+  async carregarLucroBruto(){
+    const animaisVendidos = await this.operacoesService.getAnimaisVendidos();
+    animaisVendidos.forEach(a => {
+      this.operacoesService.getVendaAnimal(a.id).subscribe(data => {
+        this.lucros = data;
+        this.lucros.forEach(data2 => {
+          let dataNova = new Date(data2.data.seconds*1000);
+          let dataAtual = new Date();
+          if(data2.data.toDate().getFullYear() == dataAtual.getFullYear()){
+            this.lucroBruto += data2.valor;
+          }
+        })
+      })
+    })
   }
 
   carregarCustoTotal(){
@@ -39,19 +59,21 @@ export class CustosPage implements OnInit {
         this.financeiroService.getCustosFornecedor(data2.id).subscribe(data3 => {
           this.financas = data3;   
           this.financas.forEach(data4 => {
-            this.custoTotal += data4.valor;
-            if(data4.tipo == "Compra Animal"){
-              this.custoComp += data4.valor;
-            }else if(data4.tipo == "Veterinário"){
-              this.custoVet += data4.valor;
-            } else if(data4.tipo == "Alimentação") {
-              this.custoAli += data4.valor;
-            } else if(data4.tipo == "Medicação") {
-              this.custoMed += data4.valor;
-            } else if(data4.tipo == "Manutenção") {
-              this.custoMan += data4.valor;
-            } else if(data4.tipo == "Custo Básico") {
-              this.custoBasico += data4.valor;
+            let dataNova = new Date(data4.data.seconds*1000);
+            let dataAtual = new Date();
+            if(data4.data.toDate().getFullYear() == dataAtual.getFullYear()){
+              this.custoTotal += data4.valor;
+              if(data4.tipo == "Veterinário"){
+                this.custoVet += data4.valor;
+              } else if(data4.tipo == "Alimentação") {
+                this.custoAli += data4.valor;
+              } else if(data4.tipo == "Medicação") {
+                this.custoMed += data4.valor;
+              } else if(data4.tipo == "Manutenção") {
+                this.custoMan += data4.valor;
+              } else if(data4.tipo == "Custo Básico") {
+                this.custoBasico += data4.valor;
+              }
             }
             this.dataGraficoCustoxTipo = [{
               data: [this.custoComp, this.custoVet, this.custoAli, this.custoMed, this.custoMan, this.custoBasico], 
@@ -62,7 +84,7 @@ export class CustosPage implements OnInit {
                 '#FFFF00',
                 '#00FF00',
                 '#FF7F00',
-                '#FFA500'
+                '#9400D3'
               ],
               color: 'white'
             }];

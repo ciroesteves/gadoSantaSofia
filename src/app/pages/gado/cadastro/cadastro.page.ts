@@ -1,12 +1,9 @@
 import { FinanceiroService } from './../../../service/financeiro.service';
 import { OperacoesService } from 'src/app/service/operacoes.service';
-import { Gado } from 'src/app/interfaces/gado';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, NavController } from '@ionic/angular';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
-import { empty } from 'rxjs';
-
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
@@ -66,6 +63,7 @@ export class CadastroPage implements OnInit {
     if(animais.dataCompra != '' && animais.dataCompra != null){
       animais.dataCompra = new Date(animais.dataCompra);
     }
+    animais.peso = 0;
     animais.status = 'vivo';
     this.service.addAnimal(animais);
     this.cadastroForm.reset();

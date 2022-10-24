@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Gado } from 'src/app/interfaces/gado';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 
 @Component({

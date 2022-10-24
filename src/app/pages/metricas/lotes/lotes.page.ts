@@ -48,7 +48,6 @@ export class LotesPage implements OnInit {
         this.countAte150 = this.countAte300 = this.countAte450 = this.countAte600 = this.countMaior600 = 0;
         this.mediaPeso = this.countTotal = this.countSemPeso = this.totalPeso = this.mediaIdade =  0;
         this.animais.forEach(element => {
-
           // Gênero do animal
           if(element.sexo == 'Macho'){
             this.countMacho++;
@@ -83,7 +82,9 @@ export class LotesPage implements OnInit {
           } // Fim Peso animal
           // Indicadores gerais
           this.countTotal++;
-          this.totalPeso += Math.round(element.peso);
+          if(element.peso > 0){
+            this.totalPeso += Math.round(element.peso);
+          }
           this.mediaIdade += (Date.now()/1000) - element.nascimento['seconds'];
         });
         this.totalPeso = this.totalPeso*1;

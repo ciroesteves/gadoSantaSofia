@@ -41,6 +41,6 @@ export class CadastroPage implements OnInit {
     const fornecedor = this.cadastroForm.value;
     this.financeiroService.addFornecedor(fornecedor);
     this.cadastroForm.reset();
-    this.navCtrl.navigateBack('/compradores/geral');
+    this.navCtrl.navigateBack('financeiro/compradores/geral');
   }
 }

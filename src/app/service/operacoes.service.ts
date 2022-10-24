@@ -70,7 +70,7 @@ export class OperacoesService {
     return this.animaisCollection.doc(id).delete();
   }
 
-  async getanimalNumero(numero: number){
+  getanimalNumero(numero: number){
     return this.animaisCollection.ref.where('numero', '==', numero).where('status', '==', 'vivo').get();
   }
 
@@ -175,6 +175,23 @@ export class OperacoesService {
   addDadosVenda(id: string, formVenda: any){
     this.addstatus(id, 'vendido');
     return this.animaisCollection.doc(id).collection('venda').doc().set(formVenda);
+  }
+
+  async getAnimaisVendidos(){
+    const animaisVendidos = await this.animaisCollection.ref.where('status', '==', 'vendido').get();
+    return animaisVendidos;
+  }
+
+  getVendaAnimal(id: string){
+    return this.animaisCollection.doc(id).collection('venda').snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    )
   }
 
   async getAnimaisVendedor(id: string){

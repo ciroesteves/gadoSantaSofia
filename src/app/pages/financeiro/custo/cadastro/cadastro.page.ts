@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, NavController } from '@ionic/angular';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 import { FinanceiroService } from 'src/app/service/financeiro.service';
-import { OperacoesService } from 'src/app/service/operacoes.service';
 
 @Component({
   selector: 'app-cadastro',
