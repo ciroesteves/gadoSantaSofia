@@ -74,6 +74,10 @@ export class OperacoesService {
     return this.animaisCollection.ref.where('numero', '==', numero).where('status', '==', 'vivo').get();
   }
 
+  getAnimaisLote(lote: string){
+    return this.animaisCollection.ref.where('lote', '==', lote).where('status', '==', 'vivo').get();
+  }
+
   async addPesagem(numero: number, pesagem: Pesagem){
     const animal = await this.getanimalNumero(numero);
     if (!animal.empty) {
