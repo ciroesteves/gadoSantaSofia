@@ -25,10 +25,7 @@ const routes: Routes = [
   {path: 'calculadora/lotes', loadChildren: () => import('./pages/calculadora/venda-lotes/venda-lotes.module').then( m => m.VendaLotesPageModule)},
   {path: 'calculadora/alimentacao', loadChildren: () => import('./pages/calculadora/alimentacao-lotes/alimentacao-lotes.module').then( m => m.AlimentacaoLotesPageModule)},
   {path: 'calculadora', loadChildren: () => import('./pages/calculadora/menu-calculadora/menu-calculadora.module').then( m => m.MenuCalculadoraPageModule)},
-  {
-    path: 'venda-faixas',
-    loadChildren: () => import('./pages/calculadora/venda-faixas/venda-faixas.module').then( m => m.VendaFaixasPageModule)
-  },
+  {path: 'calculadora/faixas', loadChildren: () => import('./pages/calculadora/venda-faixas/venda-faixas.module').then( m => m.VendaFaixasPageModule)},
 ];
 
 @NgModule({

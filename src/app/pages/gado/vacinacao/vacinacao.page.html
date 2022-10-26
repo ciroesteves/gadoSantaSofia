@@ -6,8 +6,9 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <body style="background-color: #558335; ">
-  <ion-grid >
+  <ion-grid style="text-align: center;">
     <ion-card style="margin-top: 150px; background-color: lightgray;">
       <form [formGroup]="vacinacaoForm" (submit)="addvacinacaoAnimal()">
         <ion-item>
@@ -33,9 +34,117 @@
             <ion-select-option value="Leptospirose">Leptospirose</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-button type="submit" [disabled]="vacinacaoForm.invalid" expand="block">Salvar</ion-button> 
+        <ion-button type="submit" [disabled]="vacinacaoForm.invalid" expand="block">Salvar</ion-button>
       </form>
-      <ion-button color="danger" (click)="limparForm()" expand="block">Limpar</ion-button> 
+      <ion-button color="danger" (click)="limparForm()" expand="block">Limpar</ion-button>
     </ion-card>
+    <ion-button id="open-modal-atrasos">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <ion-text style="margin-left: 5px;">Atrasados</ion-text>
+    </ion-button>
   </ion-grid>
 </body>
+
+<ion-modal trigger="open-modal-atrasos">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Voltar</ion-button>
+        </ion-buttons>
+        <ion-title>Vacinação Atrasada</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-list>
+        <ion-item-sliding *ngFor="let endoparasita of endoparasitas">
+          <ion-item *ngIf="endoparasita.status == 'vivo'" style="font-size: large;" button [routerLink]="['/gado/detalhes', endoparasita.id]">
+            <ion-avatar slot="start" *ngIf="endoparasita.sexo === 'Fêmea'" style="background-color: lightsalmon; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{endoparasita.numero}}</h2>
+            </ion-avatar>
+            <ion-avatar slot="start" *ngIf="endoparasita.sexo === 'Macho'" style="background-color: lightblue; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{endoparasita.numero}}</h2>
+            </ion-avatar>
+            <ion-label>
+              {{endoparasita.nome}}
+              <p>{{endoparasita.lote}} - {{(((dataAtual-(endoparasita.nascimento.seconds*1000))/1000)/(60*60*24*30)) | number:'0.0-0'}} Meses</p>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+      <ion-list>
+        <ion-item-sliding *ngFor="let ectoparasita of ectoparasitas">
+          <ion-item *ngIf="ectoparasita.status == 'vivo'" style="font-size: large;" button [routerLink]="['/gado/detalhes', ectoparasita.id]">
+            <ion-avatar slot="start" *ngIf="ectoparasita.sexo === 'Fêmea'" style="background-color: lightsalmon; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{ectoparasita.numero}}</h2>
+            </ion-avatar>
+            <ion-avatar slot="start" *ngIf="ectoparasita.sexo === 'Macho'" style="background-color: lightblue; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{ectoparasita.numero}}</h2>
+            </ion-avatar>
+            <ion-label>
+              {{ectoparasita.nome}}
+              <p>{{ectoparasita.lote}} - {{(((dataAtual-(ectoparasita.nascimento.seconds*1000))/1000)/(60*60*24*30)) | number:'0.0-0'}} Meses</p>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+      <ion-list>
+        <ion-item-sliding *ngFor="let aftosa of aftosas">
+          <ion-item *ngIf="aftosa.status == 'vivo'" style="font-size: large;" button [routerLink]="['/gado/detalhes', aftosa.id]">
+            <ion-avatar slot="start" *ngIf="aftosa.sexo === 'Fêmea'" style="background-color: lightsalmon; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{aftosa.numero}}</h2>
+            </ion-avatar>
+            <ion-avatar slot="start" *ngIf="aftosa.sexo === 'Macho'" style="background-color: lightblue; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{aftosa.numero}}</h2>
+            </ion-avatar>
+            <ion-label>
+              {{aftosa.nome}}
+              <p>{{aftosa.lote}} - {{(((dataAtual-(aftosa.nascimento.seconds*1000))/1000)/(60*60*24*30)) | number:'0.0-0'}} Meses</p>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+      <ion-list>
+        <ion-item-sliding *ngFor="let clostridiose of clostridioses">
+          <ion-item *ngIf="clostridiose.status == 'vivo'" style="font-size: large;" button [routerLink]="['/gado/detalhes', clostridiose.id]">
+            <ion-avatar slot="start" *ngIf="clostridiose.sexo === 'Fêmea'" style="background-color: lightsalmon; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{clostridiose.numero}}</h2>
+            </ion-avatar>
+            <ion-avatar slot="start" *ngIf="clostridiose.sexo === 'Macho'" style="background-color: lightblue; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{clostridiose.numero}}</h2>
+            </ion-avatar>
+            <ion-label>
+              {{clostridiose.nome}}
+              <p>{{clostridiose.lote}} - {{(((dataAtual-(clostridiose.nascimento.seconds*1000))/1000)/(60*60*24*30)) | number:'0.0-0'}} Meses</p>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+      <ion-list>
+        <ion-item-sliding *ngFor="let brucelose of bruceloses">
+          <ion-item *ngIf="brucelose.status == 'vivo'" style="font-size: large;" button [routerLink]="['/gado/detalhes', brucelose.id]">
+            <ion-avatar slot="start" *ngIf="brucelose.sexo === 'Fêmea'" style="background-color: lightsalmon; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{brucelose.numero}}</h2>
+            </ion-avatar>
+            <ion-avatar slot="start" *ngIf="brucelose.sexo === 'Macho'" style="background-color: lightblue; text-align: center; width: 50px; height: 50px;">
+              <h2 style="margin-top: 10px; padding-top: 0px;">{{brucelose.numero}}</h2>
+            </ion-avatar>
+            <ion-label>
+              {{brucelose.nome}}
+              <p>{{brucelose.lote}} - {{(((dataAtual-(brucelose.nascimento.seconds*1000))/1000)/(60*60*24*30)) | number:'0.0-0'}} Meses</p>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+      <ion-list>
+        <ion-item-sliding *ngFor="let raiva of raivas">
+          <ion-item style="font-size: large;">
+            <ion-label>
+              t
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>

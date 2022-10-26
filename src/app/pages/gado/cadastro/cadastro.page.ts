@@ -67,7 +67,7 @@ export class CadastroPage implements OnInit {
     animais.status = 'vivo';
     this.service.addAnimal(animais);
     this.cadastroForm.reset();
-    this.navCtrl.navigateBack('/geral');
+    this.navCtrl.navigateBack('/gado/geral');
   }
 
   async presentLoading() {

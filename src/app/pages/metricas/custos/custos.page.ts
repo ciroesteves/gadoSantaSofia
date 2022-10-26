@@ -53,6 +53,16 @@ export class CustosPage implements OnInit {
   }
 
   carregarCustoTotal(){
+    this.financasSubscription = this.operacoesService.getAnimais().subscribe(data => {
+      this.financas = data;
+      this.financas.forEach(data2 => {
+        let dataNova = new Date(data2.dataCompra.seconds*1000);
+        let dataAtual = new Date();
+        if(dataNova.getFullYear() == dataAtual.getFullYear() && data2.valor > 0){
+          this.custoComp += data2.valor;
+        }
+      })
+    })
     this.financasSubscription = this.financeiroService.getCompradores().subscribe(data => {
       this.financas = data;
       this.financas.forEach(data2 => {
@@ -61,7 +71,7 @@ export class CustosPage implements OnInit {
           this.financas.forEach(data4 => {
             let dataNova = new Date(data4.data.seconds*1000);
             let dataAtual = new Date();
-            if(data4.data.toDate().getFullYear() == dataAtual.getFullYear()){
+            if(dataNova.getFullYear() == dataAtual.getFullYear()){
               this.custoTotal += data4.valor;
               if(data4.tipo == "Veterinário"){
                 this.custoVet += data4.valor;

@@ -41,16 +41,16 @@ export class OperacoesService {
       });
       await alert.present();
       return;
-    
+
     }
   }
 
-  getAnimais(){
+  getAnimais() {
     return this.animaisCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-            let data = a.payload.doc.data();
-            let id = a.payload.doc.id;
+          let data = a.payload.doc.data();
+          let id = a.payload.doc.id;
           return { id, ...data };
         });
       })
@@ -64,25 +64,25 @@ export class OperacoesService {
   updateAnimal(id: string, gado: any) {
     return this.animaisCollection.doc(id).update(gado);
   }
-  
+
 
   deleteAnimalId(id: string) {
     return this.animaisCollection.doc(id).delete();
   }
 
-  getanimalNumero(numero: number){
+  getanimalNumero(numero: number) {
     return this.animaisCollection.ref.where('numero', '==', numero).where('status', '==', 'vivo').get();
   }
 
-  getAnimaisLote(lote: string){
+  getAnimaisLote(lote: string) {
     return this.animaisCollection.ref.where('lote', '==', lote).where('status', '==', 'vivo').get();
   }
 
-  async addPesagem(numero: number, pesagem: Pesagem){
+  async addPesagem(numero: number, pesagem: Pesagem) {
     const animal = await this.getanimalNumero(numero);
     if (!animal.empty) {
       animal.forEach(doc => {
-        return this.animaisCollection.doc(doc.id).collection('pesagem').doc().set({data: pesagem.data, peso: pesagem.peso});
+        return this.animaisCollection.doc(doc.id).collection('pesagem').doc().set({ data: pesagem.data, peso: pesagem.peso });
       });
       const alert = await this.alertController.create({
         header: 'Sucesso',
@@ -90,36 +90,36 @@ export class OperacoesService {
         message: 'Cadastro realizado',
         buttons: ['OK'],
       });
-  
+
       await alert.present();
       return;
-    } else{
+    } else {
       const alert = await this.alertController.create({
         header: 'Erro',
         subHeader: 'Animal: ' + numero,
         message: 'Animal não encontrado',
         buttons: ['OK'],
       });
-  
+
       await alert.present();
       return;
     }
   }
 
-  async addCampoPeso(numero: number, peso: number){
+  async addCampoPeso(numero: number, peso: number) {
     const animal = await this.getanimalNumero(numero);
     if (!animal.empty) {
       animal.forEach(doc => {
-        return this.animaisCollection.doc(doc.id).update({peso: peso});
+        return this.animaisCollection.doc(doc.id).update({ peso: peso });
       });
     }
   }
 
-  async addVacinacao(numero: number, vacinacao: any){
+  async addVacinacao(numero: number, vacinacao: any) {
     const animal = await this.getanimalNumero(numero);
     if (!animal.empty) {
       animal.forEach(doc => {
-        return this.animaisCollection.doc(doc.id).collection('vacinacao').doc(vacinacao.vacina).set({data: vacinacao.data}); 
+        return this.animaisCollection.doc(doc.id).collection('vacinacao').doc(vacinacao.vacina).set({ data: vacinacao.data });
       });
       const alert = await this.alertController.create({
         header: 'Sucesso',
@@ -127,103 +127,103 @@ export class OperacoesService {
         message: 'Cadastro realizado',
         buttons: ['OK'],
       });
-  
+
       await alert.present();
       return;
-    } else{
+    } else {
       const alert = await this.alertController.create({
         header: 'Erro',
         subHeader: 'Animal: ' + numero,
         message: 'Animal não encontrado',
         buttons: ['OK'],
       });
-  
+
       await alert.present();
       return;
     }
   }
 
-  getPesagemId(id: string){
+  getPesagemId(id: string) {
     return this.animaisCollection.doc(id).collection('pesagem').snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-          return { id, ...data };       
-        });
-      })
-    )
-  }
-
-  getVacinacaoId(id: string){
-    return this.animaisCollection.doc(id).collection('vacinacao').snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
           return { id, ...data };
         });
       })
     )
   }
 
-  addstatus(id: string, statusAnimal: string){
-    return this.animaisCollection.doc(id).update({status: statusAnimal});
+  getVacinacaoId(id: string) {
+    return this.animaisCollection.doc(id).collection('vacinacao').snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    )
   }
 
-  addDadosMorte(id: string, formMorte: any){
+  addstatus(id: string, statusAnimal: string) {
+    return this.animaisCollection.doc(id).update({ status: statusAnimal });
+  }
+
+  addDadosMorte(id: string, formMorte: any) {
     this.addstatus(id, 'morto');
     return this.animaisCollection.doc(id).collection('morte').doc().set(formMorte);
   }
 
-  addDadosVenda(id: string, formVenda: any){
+  addDadosVenda(id: string, formVenda: any) {
     this.addstatus(id, 'vendido');
     return this.animaisCollection.doc(id).collection('venda').doc().set(formVenda);
   }
 
-  async getAnimaisVendidos(){
+  async getAnimaisVendidos() {
     const animaisVendidos = await this.animaisCollection.ref.where('status', '==', 'vendido').get();
     return animaisVendidos;
   }
 
-  getVendaAnimal(id: string){
+  getVendaAnimal(id: string) {
     return this.animaisCollection.doc(id).collection('venda').snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
           return { id, ...data };
         });
       })
     )
   }
 
-  async getAnimaisVendedor(id: string){
+  async getAnimaisVendedor(id: string) {
     const animais = await this.animaisCollection.ref.where('vendedor', '==', id).get();
-    if(animais.size > 0){
+    if (animais.size > 0) {
       const alert = await this.alertController.create({
         header: 'Erro',
         subHeader: 'Falha na exclusão',
         message: 'Fornecedor vinculado a negociações',
         buttons: ['OK'],
       });
-  
+
       await alert.present();
       return animais.size;
-    }else {
+    } else {
       const alert = await this.alertController.create({
         header: 'Sucesso',
         subHeader: 'Exclusão finalizada',
         message: 'Fornecedor foi excluído definitivamente',
         buttons: ['OK'],
       });
-  
+
       await alert.present();
       return animais.size;
     }
   }
 
-  imageName(){
+  imageName() {
     const newTime = Math.floor(Date.now() / 1000);
     return String(Math.floor(Math.random() * 20) + newTime);
   }

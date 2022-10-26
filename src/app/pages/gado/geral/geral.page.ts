@@ -18,8 +18,6 @@ export class GeralPage implements OnInit {
     private loginService: AutenticacaoService,
   ) { 
     this.loginService.verificaLogged();
-    this.dataAtual = new Date();
-    this.operacoesService.getAnimaisVendidos();
     this.animaisSubscription = this.operacoesService.getAnimais().subscribe(data => {
       function compare( a, b ) {
         if ( a.numero < b.numero ){
