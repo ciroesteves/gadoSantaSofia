@@ -32,7 +32,7 @@ export class EdicaoPage implements OnInit {
     if (this.fornecedorId){
       this.carregarFornecedor();
     } else{
-      this.navCtrl.navigateBack('/compradores/geral');
+      this.navCtrl.navigateBack('/financeiro/compradores/geral');
     }
   }
 
@@ -73,7 +73,7 @@ export class EdicaoPage implements OnInit {
     await this.presentLoading();
     await this.financeiroService.updateFornecedor(this.fornecedorId, fornecedor);
     await this.loading.dismiss();
-    this.navCtrl.navigateBack('/compradores/geral');
+    this.navCtrl.navigateBack('/financeiro/compradores/geral');
    
   }
 

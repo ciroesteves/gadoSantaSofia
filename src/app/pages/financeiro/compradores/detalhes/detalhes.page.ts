@@ -44,7 +44,7 @@ export class DetalhesPage implements OnInit {
     if (this.fornecedorId){
       this.carregarFornecedor();
     } else{
-      this.navCtrl.navigateBack('/compradores/geral');
+      this.navCtrl.navigateBack('/financeiro/compradores/geral');
     }
 
   }
@@ -88,7 +88,7 @@ export class DetalhesPage implements OnInit {
           const valor = await Promise.resolve(contador)
           if(valor == 0){
             this.financeiroService.deleteFornecedor(this.fornecedorId);
-            this.navCtrl.navigateBack('/compradores/geral');
+            this.navCtrl.navigateBack('financeiro/compradores/geral');
           }
         } 
       },

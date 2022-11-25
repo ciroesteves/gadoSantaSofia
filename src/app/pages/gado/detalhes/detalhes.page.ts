@@ -51,7 +51,7 @@ export class DetalhesPage implements OnInit {
     if (this.gadoId){
       this.carregarAnimal();
     } else{
-      this.navCtrl.navigateBack('/geral');
+      this.navCtrl.navigateBack('/gado/geral');
     }
 
     this.financeiro.getCompradores().subscribe(data3 => {

@@ -94,13 +94,13 @@
             <ion-item style="font-size: large;">
               <ion-label>
                 <ion-row>
-                  <ion-col style="text-align: center;">
+                  <ion-col class="card-custo">
                     {{custo.tipo}}
                   </ion-col>
-                  <ion-col style="text-align: center;">
+                  <ion-col class="card-custo">
                     {{custo.valor | currency:'BRL'}}
                   </ion-col>
-                  <ion-col style="text-align: center;">
+                  <ion-col class="card-custo">
                     {{(custo.data.seconds+(3*60*60))*1000 | date:'dd/MM/yyyy'}}
                   </ion-col>
                 </ion-row>

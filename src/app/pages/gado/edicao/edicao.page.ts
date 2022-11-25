@@ -129,7 +129,7 @@ export class EdicaoPage implements OnInit {
     await this.presentLoading();
     await this.operacoesService.updateAnimal(this.gadoId, animais);
     await this.loading.dismiss();
-    this.navCtrl.navigateBack('/geral');
+    this.navCtrl.navigateBack('/gado/geral');
    
   }
 
