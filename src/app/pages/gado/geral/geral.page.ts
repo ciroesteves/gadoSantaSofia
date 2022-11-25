@@ -2,6 +2,7 @@ import { OperacoesService } from 'src/app/service/operacoes.service';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Network } from '@awesome-cordova-plugins/network/ngx';
 
 @Component({
   selector: 'app-geral',
@@ -16,6 +17,7 @@ export class GeralPage implements OnInit {
   constructor(
     private operacoesService: OperacoesService,
     private loginService: AutenticacaoService,
+    private network: Network
   ) { 
     this.loginService.verificaLogged();
     this.animaisSubscription = this.operacoesService.getAnimais().subscribe(data => {
@@ -31,6 +33,7 @@ export class GeralPage implements OnInit {
       data.sort( compare );
       this.animais = data;
     })
+    this.dataAtual = new Date();
   }
 
   ngOnInit() {}

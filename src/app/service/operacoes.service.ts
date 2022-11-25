@@ -15,7 +15,7 @@ export class OperacoesService {
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage,
-    private alertController: AlertController
+    private alertController: AlertController,
   ) {
     this.animaisCollection = this.db.collection('gado');
   }

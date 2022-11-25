@@ -78,7 +78,7 @@ export class DetalhesPage implements OnInit {
   async confirmacaoDelecao(){
     const alert = await this.alertController.create({
       header: 'Confirmar exclusão',
-      subHeader: 'Animal: ' + this.fornecedor.nome,
+      subHeader: this.fornecedor.nome,
       message: 'Clique em OK para excluir definitivamente',
       buttons: [{
         text: 'OK',

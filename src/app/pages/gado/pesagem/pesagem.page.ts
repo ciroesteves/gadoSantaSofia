@@ -16,6 +16,7 @@ export class PesagemPage implements OnInit {
   pesagem: any;
   animaisSubscription: Subscription;
   animais = new Array();
+  dataAtual: any;
 
   constructor(
     private builder: FormBuilder,
@@ -46,6 +47,7 @@ export class PesagemPage implements OnInit {
       data = data.sort( ordena );
       this.animais = data;
     })
+    this.dataAtual = new Date();
   }
 
   ngOnInit() {

@@ -1,0 +1,24 @@
+ion-item{
+    color: white;
+    --ion-item-background:#558335;
+    width: 100%;
+}
+ion-card{
+    color: white;
+    --ion-item-background: #558335;
+    font-size: large;
+}
+
+ion-modal ion-item{
+    color: black;
+    --ion-item-background: lightgray;
+}
+
+ion-col{
+    text-align: center;
+}
+
+ion-card{
+    width: 98%;
+    margin-left: 1%;
+}
